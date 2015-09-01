@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load blog_tags %}
+
+
+{% block heading %}
+    <div class="jumbotron">
+        <h1>{{ self.title }}</h1>
+        <p>{{ self.intro }}</p>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    {% include "common/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
+
+    {% include "common/includes/body.html" with body=self.body only %}
+
+    {% blog_listing %}
+
+    {# to be added once i finish the event pages #}
+
+  {#  {% event_listing_homepage %} #}
+{% endblock %}
