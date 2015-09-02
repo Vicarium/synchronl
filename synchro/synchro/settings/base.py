@@ -54,6 +54,8 @@ INSTALLED_APPS = (
 # In-house apps
     'common',
     'blog',
+    'event',
+    'person',
 )
 
 MIDDLEWARE_CLASSES = (

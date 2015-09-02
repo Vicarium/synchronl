@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load blog_tags %}
+{% load blog_tags event_tags %}
 
 
 {% block heading %}
@@ -17,7 +17,5 @@
 
     {% blog_listing %}
 
-    {# to be added once i finish the event pages #}
-
-  {#  {% event_listing_homepage %} #}
+    {% event_listing %}
 {% endblock %}

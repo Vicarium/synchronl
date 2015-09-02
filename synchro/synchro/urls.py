@@ -15,6 +15,8 @@ urlpatterns = [
 
     url(r'^search/$', 'search.views.search', name='search'),
 
+    # For anything not caught by a more specific rule above, hand over to
+    # Wagtail's serving mechanism
     url(r'', include(wagtail_urls)),
 ]
 
