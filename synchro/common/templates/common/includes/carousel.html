@@ -15,7 +15,7 @@
       {% for carousel_item in carousel_items %}
         <div class="item{% if forloop.first %} active{% endif %}">
           {% if carousel_item.embed_url %}
-            {# Embedded video - requires an embedly key to be stored in wagtaildemo/settings/local.py #}
+            {# Embedded video - requires an embedly key to be stored in project/settings/local.py #}
             <div class="text-center">
               {{ carousel_item.embed_url|embed:1000 }}
             </div>
