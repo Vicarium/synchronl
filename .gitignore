@@ -42,7 +42,12 @@ node_modules/
 
 # virtual environment folder
 venv*
+venv
 
 # Databases
 db.sqlite3
 *.db
+
+# Folders
+migrations/
+media/
