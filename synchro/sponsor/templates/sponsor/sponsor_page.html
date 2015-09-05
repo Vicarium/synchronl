@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-{% load blog_tags event_tags %}
-
+{% load wagtailimages_tags %}
 
 {% block heading %}
     <div class="jumbotron">
@@ -11,16 +10,9 @@
 
 
 {% block content %}
-    {% include "common/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
 
     {% include "common/includes/body.html" with body=self.body only %}
 
-    {% blog_listing %}
+    {% include "sponsor/includes/sponsor_section.html" with sponsors=self.sponsor.all %}
 
-    {% event_listing %}
-
-
-    {# Sponsors footer
-    {% sponsors_bar %}
-    #}
 {% endblock %}

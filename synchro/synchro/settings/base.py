@@ -56,6 +56,8 @@ INSTALLED_APPS = (
     'blog',
     'event',
     'person',
+    'about',
+    'sponsor',
 )
 
 MIDDLEWARE_CLASSES = (
