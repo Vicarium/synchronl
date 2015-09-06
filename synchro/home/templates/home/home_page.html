@@ -14,13 +14,12 @@
     {% include "common/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
 
     {% include "common/includes/body.html" with body=self.body only %}
-
+	<div class="col-sm-4">
     {% blog_listing %}
-
+	</div>
+	<div class="col-sm-4">
     {% event_listing %}
+	</div>
 
-
-    {# Sponsors footer
-    {% sponsors_bar %}
-    #}
+ 
 {% endblock %}
