@@ -8,10 +8,7 @@ from wagtail.wagtailimages.models import Image
 from wagtail.wagtailimages.models import AbstractImage
 from wagtail.wagtailsearch import index
 
-
 from modelcluster.fields import ParentalKey
-
-
 
 
 # Basic Gallery page with optional thumbnail
@@ -35,7 +32,7 @@ GalleryPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
     FieldPanel('body', classname="full"),
-    InlinePanel(GalleryPage, 'photo', label="Images")
+    InlinePanel(GalleryPage, 'galleryimage', label="Images")
 ]
 
 GalleryPage.promote_panels = Page.promote_panels + [
@@ -43,5 +40,22 @@ GalleryPage.promote_panels = Page.promote_panels + [
 ]
 
 
-class SponsorPageSponsor(Orderable, AbstractImage):
-    page = ParentalKey('gallery.GalleryPage', related_name='photo')
+# Abstract model for picking images
+class SimpleImage(models.Model):
+    name = models.CharField(max_length=255)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=False,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('name'),
+        ImageChooserPanel('image')
+    ]
+
+
+class GalleryPageSimpleImage(Orderable, SimpleImage):
+    page = ParentalKey('gallery.GalleryPage', related_name='galleryimage')
