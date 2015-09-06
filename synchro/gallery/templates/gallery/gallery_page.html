@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="css/blueimp-gallery.min.css">
+{% endblock %}
+
+
+{% block heading %}
+  <div class="jumbotron">
+      <h1>{{ self.title }}</h1>
+      <p>{{ self.intro }}</p>
+  </div>
+{% endblock %}
+
+
+{% block body %}
+  <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+  <div id="blueimp-gallery" class="blueimp-gallery">
+      <div class="slides"></div>
+      <h3 class="title"></h3>
+      <a class="prev">‹</a>
+      <a class="next">›</a>
+      <a class="close">×</a>
+      <a class="play-pause"></a>
+      <ol class="indicator"></ol>
+  </div>
+
+  <!-- Images in the gallery -->
+  <div id="links">
+    {% for photo in self.image.all %}
+      {# First store image as a variable in order to construct an image tag with a title applied #}
+      {% image photo height-200 as photodata %}
+
+      <a href="{{ photodata.url }}" title="photodata.alt">
+        <img src="{{ photodata.url }}" alt="photodata.alt">
+      </a>
+    {% endfor %}
+  </div>
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+  <script src="js/blueimp-gallery.min.js"></script>
+
+  <script>
+  document.getElementById('links').onclick = function (event) {
+      event = event || window.event;
+      var target = event.target || event.srcElement,
+          link = target.src ? target.parentNode : target,
+          options = {index: link, event: event},
+          links = this.getElementsByTagName('a');
+      blueimp.Gallery(links, options);
+  };
+{% endblock %}
+
+</script>

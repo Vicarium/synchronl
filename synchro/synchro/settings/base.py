@@ -58,6 +58,7 @@ INSTALLED_APPS = (
     'person',
     'about',
     'sponsor',
+    'gallery',
 )
 
 MIDDLEWARE_CLASSES = (

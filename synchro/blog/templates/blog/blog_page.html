@@ -11,4 +11,7 @@
     <div class="intro">{{ self.intro }}</div>
 
     {{ self.body|richtext }}
+
+    {% include "common/includes/related_links.html" with related_links=self.related_links.all only %}
+
 {% endblock %}
