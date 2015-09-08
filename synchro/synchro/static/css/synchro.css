@@ -1,3 +1,8 @@
+
+.page-header{
+	padding-bottom:9px;padding-top:25px;margin:40px 0 20px;border-bottom:1px solid #eee
+}
+
 /* Navbar */
 
 .navbar-inverse{
@@ -100,6 +105,29 @@
 	color:#5e5e5e;background-color:transparent
 }
 
+/* Header*/
+
+.jumbotron{
+	padding:30px;margin-bottom:30px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;background-color:#eee;text-align:center
+}
+.jumbotron h1{
+	line-height:1;color:inherit
+}
+.jumbotron p{
+	line-height:1.4
+}
+.container .jumbotron{
+	border-radius:6px
+}@media screen and (min-width:768px){.jumbotron{
+	padding-top:48px;padding-bottom:48px
+}
+.container .jumbotron{
+	padding-right:60px;padding-left:60px
+}
+.jumbotron h1{
+	font-size:63px}
+}
+
 /* carousel */
 .carousel{
 	position:relative
@@ -181,4 +209,8 @@
 }
 .carousel-indicators{
 	bottom:20px}
+}
+
+.body-content{
+	Padding:40px
 }
