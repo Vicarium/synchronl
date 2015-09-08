@@ -1,10 +1,9 @@
 {% extends "base.html" %}
-{% load wagtailimages_tags %}
+{% load wagtailimages_tags static %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="css/blueimp-gallery.min.css">
+  <link rel="stylesheet" href="{% static 'gallery/css/blueimp-gallery.min.css'">
 {% endblock %}
-
 
 {% block heading %}
   <div class="jumbotron">
@@ -13,8 +12,11 @@
   </div>
 {% endblock %}
 
+{% block content %}
 
-{% block body %}
+  {% include "common/includes/body.html" with body=self.biography only %}
+
+
   <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
   <div id="blueimp-gallery" class="blueimp-gallery">
       <div class="slides"></div>
@@ -28,12 +30,14 @@
 
   <!-- Images in the gallery -->
   <div id="links">
-    {% for photo in self.image.all %}
-      {# First store image as a variable in order to construct an image tag with a title applied #}
-      {% image photo height-200 as photodata %}
+    {% for galleryimage in self.simpleimage.all %}
 
-      <a href="{{ photodata.url }}" title="photodata.alt">
-        <img src="{{ photodata.url }}" alt="photodata.alt">
+      {# First store image as two variables #}
+      {% image galleryimage.image max-80x80 as galleryicon %}
+      {% image galleryimage.image width-400 as gallerylarge %}
+
+      <a href="{{ gallerylarge.url }}" title="{{ gallerylarge.name }}">
+        <img src="{{ galleryicon.url }}" alt="{{ galleryicon.alt }}">
       </a>
     {% endfor %}
   </div>
@@ -43,7 +47,13 @@
 
 
 {% block extra_js %}
-  <script src="js/blueimp-gallery.min.js"></script>
+  <script src="{% static 'gallery/js/blueimp-gallery.min.js' %}"></script>
+
+  <!-- Trying everything in desperation -->
+  <script src="{% static 'gallery/js/blueimp-gallery.js' %}"></script>
+  <script src="{% static 'gallery/js/blueimp-helper.js' %}"></script>
+
+
 
   <script>
   document.getElementById('links').onclick = function (event) {
@@ -54,6 +64,7 @@
           links = this.getElementsByTagName('a');
       blueimp.Gallery(links, options);
   };
+  </script>
 {% endblock %}
 
 </script>

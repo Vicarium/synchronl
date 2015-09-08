@@ -44,8 +44,7 @@ class PersonPageRelatedLink(Orderable, RelatedLink):
 
 
 class PersonPage(Page, ContactFields):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
     intro = RichTextField(blank=True)
     biography = RichTextField(blank=True)
     image = models.ForeignKey(
@@ -64,16 +63,12 @@ class PersonPage(Page, ContactFields):
     )
 
     search_fields = Page.search_fields + (
-        index.SearchField('first_name'),
-        index.SearchField('last_name'),
         index.SearchField('intro'),
         index.SearchField('biography'),
     )
 
 PersonPage.content_panels = [
-    FieldPanel('title', classname="full title"),
-    FieldPanel('first_name'),
-    FieldPanel('last_name'),
+    FieldPanel('name'),
     FieldPanel('intro', classname="full"),
     FieldPanel('biography', classname="full"),
     ImageChooserPanel('image'),

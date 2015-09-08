@@ -11,6 +11,26 @@ from wagtail.wagtailsearch import index
 from modelcluster.fields import ParentalKey
 
 
+# Abstract model for picking images
+class SimpleImage(models.Model):
+    name = models.CharField(max_length=255)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=False,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('name'),
+        ImageChooserPanel('image')
+    ]
+
+    class Meta:
+        abstract = True
+
+
 # Basic Gallery page with optional thumbnail
 class GalleryPage(Page):
     intro = models.TextField(blank=True)
@@ -32,7 +52,7 @@ GalleryPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
     FieldPanel('body', classname="full"),
-    InlinePanel(GalleryPage, 'galleryimage', label="Images")
+    InlinePanel(GalleryPage, 'simpleimage', label="Images")
 ]
 
 GalleryPage.promote_panels = Page.promote_panels + [
@@ -40,22 +60,5 @@ GalleryPage.promote_panels = Page.promote_panels + [
 ]
 
 
-# Abstract model for picking images
-class SimpleImage(models.Model):
-    name = models.CharField(max_length=255)
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=False,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    panels = [
-        FieldPanel('name'),
-        ImageChooserPanel('image')
-    ]
-
-
 class GalleryPageSimpleImage(Orderable, SimpleImage):
-    page = ParentalKey('gallery.GalleryPage', related_name='galleryimage')
+    page = ParentalKey('gallery.GalleryPage', related_name='simpleimage')
