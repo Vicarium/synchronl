@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'about',
     'sponsor',
     'gallery',
+    'gdrive',
 )
 
 MIDDLEWARE_CLASSES = (
