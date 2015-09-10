@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+    {% include "common/includes/intro.html" with intro=self.intro only %}
+    {% include "common/includes/body.html" with body=self.body only %}
+
+    {% include "document/includes/document_tree.html" with docs=self.documents.all%}
+
+
+{% endblock %}
