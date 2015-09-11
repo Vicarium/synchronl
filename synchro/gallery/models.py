@@ -49,7 +49,6 @@ class GalleryPage(Page):
 
 GalleryPage.content_panels = [
     FieldPanel('title', classname="full title"),
-    FieldPanel('intro', classname="full"),
     FieldPanel('body', classname="full"),
     InlinePanel(GalleryPage, 'simpleimage', label="Images")
 ]
