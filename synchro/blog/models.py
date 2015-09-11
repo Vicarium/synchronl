@@ -11,7 +11,6 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.models import Image
 from wagtail.wagtailsearch import index
 
-
 from common.models import CarouselItem, RelatedLink, LinkFields
 
 from modelcluster.fields import ParentalKey

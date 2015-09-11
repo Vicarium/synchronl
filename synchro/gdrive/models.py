@@ -41,7 +41,7 @@ GdocPage.promote_panels = Page.promote_panels + [
 class GdrivePage(Page):
     intro = models.TextField(blank=True)
     body = RichTextField(blank=True)
-    folder_id = models.CharField(max_length=255, blank=False)
+    link = models.CharField(max_length=255, blank=False)
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -59,7 +59,7 @@ GdrivePage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
     FieldPanel('body', classname="full"),
-    FieldPanel('folder_id', classname="full")
+    FieldPanel('link', classname="full")
 ]
 
 GdrivePage.promote_panels = Page.promote_panels + [
