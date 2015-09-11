@@ -37,6 +37,7 @@ class BlogPage(Page):
     body = RichTextField()
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     date = models.DateField("Post date")
+    parent_page_types = ['blog.BlogIndexPage']
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -76,6 +77,7 @@ class BlogIndexPageRelatedLink(Orderable, RelatedLink):
 
 class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
+    subpage_types = ['blog.BlogPage']
 
     search_fields = Page.search_fields + (
         index.SearchField('intro'),

@@ -9,7 +9,7 @@ from wagtail.wagtailsearch import index
 
 from modelcluster.fields import ParentalKey
 
-from common.models import RelatedLink
+from common.models import RelatedLink, StandardIndexPage
 
 
 # Contact info
@@ -47,6 +47,8 @@ class PersonPage(Page, ContactFields):
     name = models.CharField(max_length=255)
     intro = RichTextField(blank=True)
     biography = RichTextField(blank=True)
+    parent_page_types = ['common.StandardIndexPage']
+
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,

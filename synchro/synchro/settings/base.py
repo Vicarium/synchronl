@@ -31,10 +31,16 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Wagtail requirements
     'taggit',
     'compressor',
     'modelcluster',
+    'overextends',
 
+    # Wagtail admin override
+    'dashboard',
+
+    # Wagtail itself
     'wagtail.wagtailcore',
     'wagtail.wagtailadmin',
     'wagtail.wagtailsearch',
@@ -54,12 +60,12 @@ INSTALLED_APPS = (
 # In-house apps
     'common',
     'blog',
-    'event',
     'person',
     'about',
     'sponsor',
     'gallery',
     'gdrive',
+    'event',
 )
 
 MIDDLEWARE_CLASSES = (
