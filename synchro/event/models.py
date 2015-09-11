@@ -31,6 +31,8 @@ class EventIndexPageRelatedLink(Orderable, RelatedLink):
 
 class EventIndexPage(Page):
     intro = RichTextField(blank=True)
+    subpage_types = ['event.EventPage']
+
 
     search_fields = Page.search_fields + (
         index.SearchField('intro'),
@@ -108,6 +110,7 @@ class EventPage(Page):
     body = RichTextField(blank=True)
     cost = models.CharField(max_length=255)
     signup_link = models.URLField(blank=True)
+    parent_page_types = ['event.EventIndexPage']
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
