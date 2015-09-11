@@ -33,7 +33,6 @@ class SimpleImage(models.Model):
 
 # Basic Gallery page with optional thumbnail
 class GalleryPage(Page):
-    intro = models.TextField(blank=True)
     body = RichTextField(blank=True)
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
