@@ -6,16 +6,16 @@
 {% endblock %}
 
 {% block heading %}
-  <div class="jumbotron">
+	<div class="page-header">
       <h1>{{ self.title }}</h1>
-  </div>
+	</div>
 {% endblock %}
 
 {% block content %}
-
+	<br>
   {% include "common/includes/body.html" with body=self.body only %}
 
-
+	<br>
   <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
   <div id="blueimp-gallery" class="blueimp-gallery">
       <div class="slides"></div>
@@ -40,7 +40,7 @@
       </a>
     {% endfor %}
   </div>
-
+<br>
 
 {% endblock %}
 

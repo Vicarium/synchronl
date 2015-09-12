@@ -50,7 +50,7 @@
         <![endif]-->
     </head>
 
-
+<div class="page-container">
     {# Override this block to set custom body classes on a template by template basis #}
     <body class="{% block body_class %}{% endblock %}">
 
@@ -67,7 +67,7 @@
         <div class="main container">
 
           {# Explorer style navigation menu #}
-          {% breadcrumbs %}
+          
 
           {# Page heading block #}
           {% block heading %}
@@ -75,12 +75,41 @@
                   <h1>{{ self.title }}</h1>
               </div>
           {% endblock %}
-
+		  
           {% block content %}{% endblock %}
-
+	
           {% include 'common/includes/prev_next.html' %}
 
         </div>
+</div>
+		<footer id="footer">
+			<div class="container" role="contentinfo">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-12">
+				
+									<ul class="list-inline">
+										<li><a href="#" title="SynchroNL" rel="nofollow">©2015 SynchroNL</a></li>
+										<li><a href="#" title="contatctus" rel"nofollow">Contact Us</a></li>
+											
+									</ul>
+							</div>
+						</div>
+						
+					</div>
+				</div><!--/row-->
+
+				<div class="row">
+					<div class="col-md-12">
+						<p class="text-right">
+						<br>
+						MIT License. Built and Maintained by <a href="https://rootlet.net" rel="nofollow">Rootlet</a>.
+						</p>
+					</div>
+				</div><!--/row-->
+			</div>
+		</footer>
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/synchro.js' %}"></script>

@@ -3,7 +3,7 @@
 
 {% block content %}
     {% include "common/includes/intro.html" with intro=self.intro only %}
-
+	<br><br>
     {# Uses method defined in models.py to retrieve all upcoming events #}
     {# See also standard index for creating a listing with a tag #}
     {% with self.events.all as events %}

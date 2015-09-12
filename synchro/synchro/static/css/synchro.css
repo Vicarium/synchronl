@@ -6,7 +6,7 @@
 /* Navbar */
 
 .navbar-inverse{
-	background-color:#23336c;border-color:#080808
+	background-color:#23336c;border-color:#3b56b6
 }
 .navbar-inverse .navbar-brand{
 	color:#999
@@ -23,7 +23,7 @@
 	color:#fff;background-color:transparent
 }
 .navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.active>a:hover,.navbar-inverse .navbar-nav>.active>a:focus{
-	color:#fff;background-color:#080808
+	color:#fff;background-color:#3b56b6
 }
 .navbar-inverse .navbar-nav>.disabled>a,.navbar-inverse .navbar-nav>.disabled>a:hover,.navbar-inverse .navbar-nav>.disabled>a:focus{
 	color:#444;background-color:transparent
@@ -41,7 +41,7 @@
 	border-color:#101010
 }
 .navbar-inverse .navbar-nav>.open>a,.navbar-inverse .navbar-nav>.open>a:hover,.navbar-inverse .navbar-nav>.open>a:focus{
-	color:#fff;background-color:#080808
+	color:#fff;background-color:#3b56b6
 }
 .navbar-inverse .navbar-nav>.dropdown>a:hover .caret{
 	border-top-color:#fff;border-bottom-color:#fff
@@ -53,7 +53,7 @@
 	border-top-color:#fff;border-bottom-color:#fff
 }
 @media(max-width:767px){.navbar-inverse .navbar-nav .open .dropdown-menu>.dropdown-header{
-	border-color:#080808
+	border-color:#3b56b6
 }
 .navbar-inverse .navbar-nav .open .dropdown-menu>li>a{
 	color:#999
@@ -62,7 +62,7 @@
 	color:#fff;background-color:transparent
 }
 .navbar-inverse .navbar-nav .open .dropdown-menu>.active>a,.navbar-inverse .navbar-nav .open .dropdown-menu>.active>a:hover,.navbar-inverse .navbar-nav .open .dropdown-menu>.active>a:focus{
-	color:#fff;background-color:#080808
+	color:#fff;background-color:#3b56b6
 }
 .navbar-inverse .navbar-nav .open .dropdown-menu>.disabled>a,.navbar-inverse .navbar-nav .open .dropdown-menu>.disabled>a:hover,.navbar-inverse .navbar-nav .open .dropdown-menu>.disabled>a:focus{color:#444;background-color:transparent}}
 .navbar-inverse .navbar-link{
@@ -108,7 +108,7 @@
 /* Header*/
 
 .jumbotron{
-	padding:30px;margin-bottom:30px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;background-color:#eee;text-align:center
+	padding:30px;margin-bottom:30px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;background-color:#fff;text-align:center
 }
 .jumbotron h1{
 	line-height:1;color:inherit
@@ -119,7 +119,7 @@
 .container .jumbotron{
 	border-radius:6px
 }@media screen and (min-width:768px){.jumbotron{
-	padding-top:48px;padding-bottom:48px
+	padding-top:15px;padding-bottom:15px
 }
 .container .jumbotron{
 	padding-right:60px;padding-left:60px
@@ -211,6 +211,42 @@
 	bottom:20px
 }
 
-.body-content{
-	Padding:40px
+/* wrapper for page content to push down footer */
+.page-container {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* negative indent footer by its height */
+  margin: 0 auto -120px;
+  /* pad bottom by footer height */
+  padding: 0 0 120px;
 }
+
+/* set the fixed height of the footer here */
+footer {
+  height: 120px;
+  background-color: #23336c;
+  border:0 solid #3b56b6;
+  border-top-width: 1px;
+  margin-top:50px;
+  color: #bcbcbc;
+}
+
+footer > .container {
+  padding: 20px;
+}
+footer a:hover,a:focus{
+	color: #bcbcbc
+}
+body {
+  padding-top: 51px; 
+  background: #f4f6fc;
+  color: #000;
+}
+a {
+  color:#bcbcbc;
+}
+.text-center {
+  padding-top: 20px;
+}
+

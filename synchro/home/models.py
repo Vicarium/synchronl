@@ -5,7 +5,8 @@ from django.db import models
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
-
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailimages.models import Image
 from wagtail.wagtailsearch import index
 
 
@@ -27,6 +28,13 @@ class HomePageRelatedLink(Orderable, RelatedLink):
 class HomePage(Page):
     intro = models.TextField(blank=True)
     body = RichTextField(blank=True)
+    logo = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     search_fields = Page.search_fields + (
         index.SearchField('body'),
@@ -39,6 +47,7 @@ HomePage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
     FieldPanel('body', classname="full"),
+    ImageChooserPanel('logo'),
     InlinePanel(HomePage, 'carousel_items', label="Carousel items"),
     InlinePanel(HomePage, 'related_links', label="Related links"),
 ]

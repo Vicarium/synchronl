@@ -1,19 +1,22 @@
 {% extends "base.html" %}
 {% load blog_tags event_tags %}
-
+{% load wagtailimages_tags %}
 
 {% block heading %}
     <div class="jumbotron">
-        <h1>{{ self.title }}</h1>
-        <p>{{ self.intro }}</p>
+        {% image self.logo width-500 id="logo" %}
     </div>
 {% endblock %}
 
 
 {% block content %}
     {% include "common/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
-
+	<br>
+	<br>
     {% include "common/includes/body.html" with body=self.body only %}
+	<br>
+	<br>
+	
 	<div class="col-sm-4">
     {% blog_listing %}
 	</div>
