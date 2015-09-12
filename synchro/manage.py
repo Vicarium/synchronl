@@ -4,9 +4,10 @@ import sys
 
 if __name__ == "__main__":
 
-    if os.environ['IS_PRODUCTION']:
-	os.environ.setdefault("DJANGO_SETTINGS_MODULE", "synchro.settings.production")
-    else:
+    try:
+        os.environ['IS_PRODUCTION']
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "synchro.settings.production")
+    except:
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "synchro.settings")
 
     from django.core.management import execute_from_command_line

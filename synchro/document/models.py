@@ -5,10 +5,12 @@ from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
+from wagtail.wagtailsearch import index
+
 
 
 class DocumentPage(Page):
-    documents = StreamField([
+    body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
         ('paragraph', blocks.RichTextBlock()),
         ('documents', blocks.ListBlock(blocks.StructBlock([
