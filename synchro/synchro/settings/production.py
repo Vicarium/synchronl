@@ -1,15 +1,15 @@
 from .base import *
 
 
-#DEBUG = False
+DEBUG = True
 #TEMPLATE_DEBUG = False
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myproject',
-        'USER': 'myprojectuser',
-        'PASSWORD': 'password',
+        'NAME': 'synchroproject',
+        'USER': 'synchrops',
+        'PASSWORD': 'nuzansulfentalokfodvinvuldovahnok',
         'HOST': 'localhost',
         'PORT': '',
     }
