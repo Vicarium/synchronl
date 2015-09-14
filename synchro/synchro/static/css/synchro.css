@@ -105,6 +105,14 @@
 	color:#5e5e5e;background-color:transparent
 }
 
+/* Set navbar dropdown to hover on toggle */
+.dropdown:hover .dropdown-menu {
+display: block;
+}
+
+
+
+
 /* Header*/
 
 .jumbotron{
@@ -239,7 +247,7 @@ footer a:hover,a:focus{
 	color: #bcbcbc
 }
 body {
-  padding-top: 51px; 
+  padding-top: 51px;
   background: #f4f6fc;
   color: #000;
 }
@@ -249,4 +257,3 @@ a {
 .text-center {
   padding-top: 20px;
 }
-
