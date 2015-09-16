@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load blog_tags event_tags %}
-{% load wagtailimages_tags %}
+{% load wagtailimages_tags static %}
 
 {% block heading %}
+	
     <div class="jumbotron">
         {% image self.logo width-500 id="logo" %}
     </div>
