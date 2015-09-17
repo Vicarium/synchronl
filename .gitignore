@@ -50,7 +50,6 @@ db.sqlite3
 
 # Folders
 media/
-static/
 
 # Server Files
 *.sock
