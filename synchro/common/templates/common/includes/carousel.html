@@ -22,7 +22,7 @@
           {% else %}
             {# Carousel image - first store image as a variable in order to construct an image tag with a title applied (title is used by bxslider js to construct the caption) #}
             {% image carousel_item.image width-1000 as carouselimagedata %}
-            <img src="{{ carouselimagedata.url }}" style="width: {{ carouselimagedata.width }}px; max-height: 350px;" alt="{{ carouselimagedata.alt }}" /><!--use {{ carouselimagedata.height }} to use images sizes-->
+            <img src="{{ carouselimagedata.url }}" style="width: 100%; max-height: {{ carouselimagedata.height }}px;" alt="{{ carouselimagedata.alt }}" /><!--use https://pixlr.com/editor/ to edit image size to 1200x450 -->
           {% endif %}
           {% if carousel_item.caption or carousel_item.link %}
             <div class="carousel-caption">
