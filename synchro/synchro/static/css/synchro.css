@@ -257,3 +257,9 @@ a {
 .text-center {
   padding-top: 20px;
 }
+
+/* default sizing for iframe */
+iframe {
+	height: 500px;
+	width: 100%;
+}
