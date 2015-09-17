@@ -53,7 +53,10 @@ INSTALLED_APPS = (
     'wagtail.wagtailredirects',
     'wagtail.wagtailforms',
 
-# Default wagtail apps
+    # Other 3rd party apps
+#    'twitter_tag',
+
+    # Default wagtail apps
     'search',
     'home',
 
@@ -154,3 +157,14 @@ MEDIA_URL = '/media/'
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "synchro"
+
+
+# Twitter settings
+# Your access token: Access token
+TWITTER_OAUTH_TOKEN = ''
+# Your access token: Access token secret
+TWITTER_OAUTH_SECRET = ''
+# OAuth settings: Consumer key
+TWITTER_CONSUMER_KEY = ''
+# OAuth settings: Consumer secret
+TWITTER_CONSUMER_SECRET = ''
