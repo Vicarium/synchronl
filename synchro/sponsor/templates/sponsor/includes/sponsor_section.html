@@ -1,25 +1,15 @@
 {% load wagtailimages_tags wagtailembeds_tags %}
 
 {% if sponsors %}
-  <div id="sponsors" class="sponsor_images">
-    <ul style="list-style-type:none">
-      {% for sponsor in sponsors %}
-        {% if sponsor.link_external %}
-        <li class="sponsor">
-          {# Sponsor image - first store image as a variable in order to construct an image tag with a title applied #}
-          {% image sponsor.image height-200 as sponsorimagedata %}
-          <a href="{{ sponsor.link_external }}">
-            <img src="{{ sponsorimagedata.url }}" style="width: 100%; min-height: {{ sponsorimagedata.height }}px;" alt="{{ sponsorimagedata.alt }}" />
-          </a>
-        </li>
-        {% else %}
-          <li class="sponsor">
-            {# Sponsor image - first store image as a variable in order to construct an image tag with a title applied (title is used by bxslider js to construct the caption) #}
-            {% image sponsor.image height-200 as sponsorimagedata %}
-            <img src="{{ sponsorimagedata.url }}" style="width: 100%; min-height: {{ sponsorimagedata.height }}px;" alt="{{ sponsorimagedata.alt }}" />
-          </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
+  <div id="sponsors" class="row">
+    {% for sponsor in sponsors %}
+      <div class="col-lg-4 col-sm-6 col-xs-12">
+        {# Sponsor image - first store image as a variable in order to construct an image tag with a title applied #}
+        {% image sponsor.image max-800x600 as sponsorimagedata %}
+        <a href="{% if sponsor.link_external %}{{ sponsor.link_external }}{% else %}#{% endif %}">
+          <img src="{{ sponsorimagedata.url }}" alt="{{ sponsorimagedata.alt }}" class="thumbnail img-responsive">
+        </a>
+      </div>
+    {% endfor %}
   </div>
 {% endif %}

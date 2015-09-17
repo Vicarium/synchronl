@@ -265,6 +265,13 @@ a {
   padding-top: 20px;
 }
 
+
+/* default sizing for iframe */
+iframe {
+	height: 500px;
+	width: 100%;
+}
+
 .panel {
 	background-color: #337ab7;
 	border-color: #337ab7;
@@ -276,4 +283,3 @@ a {
 	background-color: #337ab7;
 	color: #fff;
 }
-

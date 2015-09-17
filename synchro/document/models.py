@@ -13,10 +13,7 @@ class DocumentPage(Page):
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
         ('paragraph', blocks.RichTextBlock()),
-        ('documents', blocks.ListBlock(blocks.StructBlock([
-            ('name', blocks.CharBlock(required=True)),
-            ('document', DocumentChooserBlock()),
-        ])))
+        ('documents', blocks.ListBlock(DocumentChooserBlock()))
     ])
 
     search_fields = Page.search_fields + (
