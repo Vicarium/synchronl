@@ -120,7 +120,7 @@ display: block;
 /* Header*/
 
 .jumbotron{
-	padding:30px;margin-right:-110px;margin-left:-110px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;background-color:#f4f6fc;text-align:center
+	padding:50px;margin-right:-110px;margin-left:-110px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;background-color:#f4f6fc;text-align:center
 }
 .jumbotron h1{
 	line-height:1;color:inherit
@@ -144,7 +144,8 @@ display: block;
 
 /* carousel */
 .carousel{
-	position:relative
+	position:relative;
+	border:10px solid #000
 }
 .carousel-inner{
 	position:relative;width:100%;overflow:hidden
