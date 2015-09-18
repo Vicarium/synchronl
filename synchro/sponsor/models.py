@@ -11,7 +11,8 @@ from modelcluster.fields import ParentalKey
 # Abstract model for sponsors
 class Sponsor(models.Model):
     name = models.CharField(max_length=255)
-    link_external = models.URLField("External link", blank=True)
+    text = models.TextField(blank=True, null=True)
+    link = models.URLField("External link", blank=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -21,8 +22,9 @@ class Sponsor(models.Model):
     )
 
     panels = [
-        FieldPanel('name'),
-        FieldPanel('link_external'),
+        FieldPanel('name', classname="full"),
+        FieldPanel('text', classname="full"),
+        FieldPanel('link', classname="full"),
         ImageChooserPanel('image')
     ]
 

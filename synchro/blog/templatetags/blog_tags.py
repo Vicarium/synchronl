@@ -20,3 +20,16 @@ def blog_listing(context, count=2):
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }
+
+# Blog feed for sidebar on other pages
+@register.inclusion_tag(
+    'blog/tags/blog_simple_listing.html',
+    takes_context=True
+)
+def blog_simple_listing(context, count=10):
+    blogs = BlogPage.objects.live().order_by('-date')
+    return {
+        'blogs': blogs[:count].select_related('feed_image'),
+        # required by the pageurl tag that we want to use within this template
+        'request': context['request'],
+    }

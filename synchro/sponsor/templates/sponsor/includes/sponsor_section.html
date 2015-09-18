@@ -10,6 +10,7 @@
         <a href="{% if sponsor.link_external %}{{ sponsor.link_external }}{% else %}#{% endif %}">
           <img src="{{ sponsorimagedata.url }}" alt="{{ sponsorimagedata.alt }}" class="thumbnail img-responsive">
         </a>
+        <p>{{ sponsor.text }}</p>
       </div>
     {% endfor %}
   </div>

@@ -1,5 +1,5 @@
 {% load common_tags static cache compress wagtailuserbar %}
-{% load wagtailimages_tags static %}
+{% load wagtailimages_tags static blog_tags%}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -82,12 +82,25 @@
               </div>
           {% endblock %}
 
-          {% block content %}{% endblock %}
+          {% block content %}
+            <div class="row">
+              <div class="col-md-8">
+                {% block left_content %}
+                {% endblock %}
+              </div>
+              <div class="col-md-4 hidden-xs">
+                {% block right_content %}
+                  {% blog_simple_listing %}
+                {% endblock %}
+              </div>
+            </div>
+          {% endblock %}
 
           {% include 'common/includes/prev_next.html' %}
 
         </div>
 </div>
+  {% block footer %}
 		<footer id="footer">
 			<div class="container" role="contentinfo">
 				<div class="row">
@@ -116,7 +129,7 @@
 				</div><!--/row-->
 			</div>
 		</footer>
-
+  {% endblock %}
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/synchro.js' %}"></script>
 

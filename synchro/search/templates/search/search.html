@@ -5,9 +5,13 @@
 
 {% block title %}Search{% endblock %}
 
-{% block content %}
-    <h1>Search</h1>
+{% block heading %}
+  <div class="page-header">
+      <h1>Search</h1>
+  </div>
+{% endblock %}
 
+{% block left_content %}
     <form action="{% url 'search' %}" method="get">
         <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
         <input type="submit" value="Search">
