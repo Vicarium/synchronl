@@ -26,11 +26,16 @@
 	<div class="col-sm-4">
     {% event_listing %}
 	</div>
-	{% if self.twitter_widget %}
-	<div class="col-sm-4">
-		{{ self.twitter_widget | safe }}
-	</div>
-	{% endif %}
+  {% if self.twitter_widget %}
+  	<div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title">Tweets</h3></div>
+        <div class="list-group">
+          {{ self.twitter_widget | safe }}
+        </div>
+  	  </div>
+    </div>
+  {% endif %}
 
 {% endblock %}
 

@@ -5,24 +5,22 @@
 	<div class="col-lg-9">
     {% include "common/includes/intro.html" with intro=self.intro only %}
 	</div>
-	<br><br>
-	<div class="col-lg-9">
-    {% if self.image %}
-        {# Person image - first store image as a variable in order to construct an image tag with a class applied #}
-        {% image self.image width-300 as photo %}
-        <img src="{{ photo.url }}" width="{{ photo.width }}" height="{{ photo.height }}" alt="{{ photo.alt }}" class="img-thumbnail" />
-    {% endif %}
-	</div>
-	<div class="col-lg-6">
-    {% if self.biography %}
-	
-        <div class="page-header"><h3>Biography</h3></div>
-		<br>
-    {% endif %}
-	
 
-    {% include "common/includes/body.html" with body=self.biography only %}
-	</div>
+  {% if self.image %}
+		<div class="col-lg-9">
+	        {# Person image - first store image as a variable in order to construct an image tag with a class applied #}
+	        {% image self.image width-300 as photo %}
+	        <img src="{{ photo.url }}" width="{{ photo.width }}" height="{{ photo.height }}" alt="{{ photo.alt }}" class="img-thumbnail" />
+		</div>
+	{% endif %}
+  {% if self.biography %}
+		<div class="col-lg-6">
+      <div class="page-header"><h3>Biography</h3></div>
+	    {% include "common/includes/body.html" with body=self.biography only %}
+		</div>
+  {% endif %}
+
+
 	<div class="col-lg-6">
     {% include "person/includes/contact.html" with contact=self only %}
 	<br>
