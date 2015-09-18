@@ -5,7 +5,7 @@
     {% for sponsor in sponsors %}
       <div class="col-lg-4 col-sm-6 col-xs-12">
         {# Sponsor image - first store image as a variable in order to construct an image tag with a title applied #}
-        {% image sponsor.image max-800x600 as sponsorimagedata %}
+        {% image sponsor.image max-200x200 as sponsorimagedata %}
         <a href="{% if sponsor.link_external %}{{ sponsor.link_external }}{% else %}#{% endif %}">
           <img src="{{ sponsorimagedata.url }}" alt="{{ sponsorimagedata.alt }}" class="thumbnail img-responsive">
         </a>
