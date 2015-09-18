@@ -1,29 +1,42 @@
 {% extends "base.html" %}
 {% load wagtailimages_tags %}
 
+
 {% block left_content %}
-	<div class="col-lg-9">
+<div class="people-container">
+	<div class="col-lg-12">
     {% include "common/includes/intro.html" with intro=self.intro only %}
 	</div>
-
+	
+	<div class="col-lg-12">
+	<br><br> 
+		<div class="people-thumb">
+	
   {% if self.image %}
-		<div class="col-lg-9">
+		
 	        {# Person image - first store image as a variable in order to construct an image tag with a class applied #}
 	        {% image self.image width-300 as photo %}
 	        <img src="{{ photo.url }}" width="{{ photo.width }}" height="{{ photo.height }}" alt="{{ photo.alt }}" class="img-thumbnail" />
+		
 		</div>
 	{% endif %}
+		<div class="people-content">
+	
   {% if self.biography %}
-		<div class="col-lg-6">
-      <div class="page-header"><h3>Biography</h3></div>
+  
+		
+		<h3>Biography</h3>
+		<br>
 	    {% include "common/includes/body.html" with body=self.biography only %}
 		</div>
   {% endif %}
+	</div>
+</div>
 
-
-	<div class="col-lg-6">
+	<div class="col-lg-12">
     {% include "person/includes/contact.html" with contact=self only %}
 	<br>
 	</div>
     {% include "common/includes/related_links.html" with related_links=self.related_links.all only %}
 {% endblock %}
+

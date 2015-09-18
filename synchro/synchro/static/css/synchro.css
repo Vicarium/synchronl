@@ -284,7 +284,7 @@ iframe {
 	color: #fff;
 }
 #sponsors{
-	width:80%
+	width:100%
 }
 .row {
 	margin-right:-15px;margin-left:-15px
@@ -300,4 +300,29 @@ iframe {
 }
 .row:after{
 	clear:both
+}
+
+.sponsor-thumb {
+    float: left
+}
+.sponsor-thumb img {
+    display: block;
+
+}
+.sponsor-content {
+    margin-left: 230px
+}
+.people-thumb {
+    float: right
+}
+.people-thumb img {
+    display: block;
+	max-width:200px;
+	padding:10px
+}
+.people-content {
+    margin-right:35%
+}
+.people-container {
+	width:100%
 }
