@@ -28,6 +28,7 @@ class HomePageRelatedLink(Orderable, RelatedLink):
 class HomePage(Page):
     intro = models.TextField(blank=True)
     body = RichTextField(blank=True)
+    twitter_widget = models.TextField(blank=True)
     logo = models.ForeignKey(
         "wagtailimages.Image",
         null=True,
@@ -47,6 +48,7 @@ HomePage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
     FieldPanel('body', classname="full"),
+    FieldPanel('twitter_widget', classname="full"),
     ImageChooserPanel('logo'),
     InlinePanel(HomePage, 'carousel_items', label="Carousel items"),
     InlinePanel(HomePage, 'related_links', label="Related links"),

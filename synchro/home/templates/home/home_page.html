@@ -3,7 +3,7 @@
 {% load wagtailimages_tags static %}
 
 {% block heading %}
-	
+
     <div class="jumbotron">
 		<h1>
         {% image self.logo width-150 id="logo" %}
@@ -19,14 +19,21 @@
     {% include "common/includes/body.html" with body=self.body only %}
 	<br>
 	<br>
-	
+
 	<div class="col-sm-4">
     {% blog_listing %}
 	</div>
 	<div class="col-sm-4">
     {% event_listing %}
 	</div>
+	{% if self.twitter_widget %}
+	<div class="col-sm-4">
+		{{ self.twitter_widget | safe }}
+	</div>
+	{% endif %}
 
+{% endblock %}
 
-	
+{% block extra_js %}
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 {% endblock %}
