@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% block content %}
+{% block left_content %}
     {% include "common/includes/intro.html" with intro=self.intro only %}
 	<br><br>
     {# Uses method defined in models.py to retrieve all upcoming events #}
