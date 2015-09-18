@@ -5,7 +5,7 @@
 {% block content %}
 
     {% include "common/includes/intro.html" with intro=self.intro only %}
-	<br><br>
+	<br>
     {% if request.GET.tag|length %}
         <h4>Showing posts tagged as {{ request.GET.tag|safe }} <a href=" {% pageurl self %} ">Show all</a></h4>
     {% endif %}

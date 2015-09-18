@@ -2,9 +2,9 @@
 
 {% block content %}
     {% include "common/includes/intro.html" with intro=self.intro only %}
-	<br><br>
+	<br>
     {% include "common/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
-	<br><br>
+	<br>
     {% include "common/includes/body.html" with body=self.body only %}
 	<br>
     {% include "common/includes/related_links.html" with related_links=self.related_links.all only %}
