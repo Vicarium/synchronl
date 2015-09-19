@@ -3,22 +3,21 @@
 {% load wagtailimages_tags static %}
 
 {% block heading %}
-    <div class="jumbotron">
-		<h1>
-        {% image self.logo width-150 id="logo" %}
+  <div class="jumbotron">
+	  <h1>
+      {% image self.logo width-150 id="logo" %}
 		</h1>
-    </div>
+    {% include "common/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
+  </div>
 {% endblock %}
 
 {% block content %}
-	
-    {% include "common/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
-	<br>
+  <br>
     {% include "common/includes/body.html" with body=self.body only %}
 	<br>
 	  {% blog_feature %}
   <br>
-	
+
 
 	<div class="col-sm-4">
     {% blog_listing %}
