@@ -144,6 +144,7 @@ display: block;
 
 /* carousel */
 .carousel{
+	width:80%;
 	position:relative;
 	border:10px solid #000
 }
