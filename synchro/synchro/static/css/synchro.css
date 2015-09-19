@@ -330,3 +330,8 @@ iframe {
 #wagtail-userbar {
 	top:52px
 }
+
+#main-container {
+	width:900px;
+	margin:0 auto;
+}

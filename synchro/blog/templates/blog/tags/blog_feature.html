@@ -1,0 +1,18 @@
+{% load wagtailcore_tags %}
+{% if blogs %}
+  <div class="well container-fluid">
+      {% for blog in blogs %}
+        <div class="row">
+          <div class="col-md-7">
+            <h3>{{ blog.title }}</h3>
+            {% if blog.search_description %}
+              <p>{{ blog.search_description }}</p>
+            {% endif %}
+          </div>
+          <div class="col-md-2">
+            <h3><a href="{% pageurl blog %}" class="btn btn-lg btn-primary pull-right"> Read More </a></h3>
+          </div>
+        </div>
+      {% endfor %}
+  </div>
+{% endif %}

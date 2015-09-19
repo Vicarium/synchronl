@@ -13,10 +13,10 @@ register = template.Library()
     'blog/tags/blog_listing.html',
     takes_context=True
 )
-def blog_listing(context, count=2):
+def blog_listing(context, count=3):
     blogs = BlogPage.objects.live().order_by('-date')
     return {
-        'blogs': blogs[:count].select_related('feed_image'),
+        'blogs': blogs[1:count].select_related('feed_image'),
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }
@@ -30,6 +30,19 @@ def blog_simple_listing(context, count=10):
     blogs = BlogPage.objects.live().order_by('-date')
     return {
         'blogs': blogs[:count].select_related('feed_image'),
+        # required by the pageurl tag that we want to use within this template
+        'request': context['request'],
+    }
+
+# Featured blog post for front page
+@register.inclusion_tag(
+    'blog/tags/blog_feature.html',
+    takes_context=True
+)
+def blog_feature(context, count=1):
+    blogs = BlogPage.objects.live().order_by('-date')
+    return {
+        'blogs': blogs[:1].select_related('feed_image'),
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }
