@@ -326,3 +326,7 @@ iframe {
 .people-container {
 	width:100%
 }
+
+#wagtail-userbar {
+	top:52px
+}

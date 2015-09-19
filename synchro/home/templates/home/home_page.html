@@ -3,14 +3,12 @@
 {% load wagtailimages_tags static %}
 
 {% block heading %}
-
     <div class="jumbotron">
 		<h1>
         {% image self.logo width-150 id="logo" %}
 		</h1>
     </div>
 {% endblock %}
-
 
 {% block content %}
     {% include "common/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
