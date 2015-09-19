@@ -4,7 +4,7 @@
 
   <div id="sponsors" class="row">
     {% for sponsor in sponsors %}
-      <div class="col-lg-12">
+      <div class="col-md-12">
         {# Sponsor image - first store image as a variable in order to construct an image tag with a title applied #}
         {% image sponsor.image max-200x200 as sponsorimagedata %}
         <a href="{% if sponsor.link_external %}{{ sponsor.link_external }}{% else %}#{% endif %}">

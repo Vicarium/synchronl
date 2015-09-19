@@ -12,10 +12,10 @@
 {% endblock %}
 
 {% block left_content %}
-	<br>
+
   {% include "common/includes/body.html" with body=self.body only %}
 
-	<br>
+	
   <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
   <div id="blueimp-gallery" class="blueimp-gallery">
       <div class="slides"></div>
@@ -26,7 +26,7 @@
       <a class="play-pause"></a>
       <ol class="indicator"></ol>
   </div>
-
+	<br>
   <!-- Images in the gallery -->
   <div id="links">
     {% for galleryimage in self.simpleimage.all %}

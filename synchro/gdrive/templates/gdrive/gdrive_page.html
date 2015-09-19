@@ -3,7 +3,7 @@
 {% block left_content %}
     {% include "common/includes/intro.html" with intro=self.intro only %}
     {% include "common/includes/body.html" with body=self.body only %}
-	<br><br>
+	<br>
     <iframe src="{{ self.link|safe}}" "height=500px width=100%"> </iframe>
 
 {% endblock %}
