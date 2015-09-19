@@ -306,23 +306,16 @@ iframe {
     float: left
 }
 .sponsor-thumb img {
-    display: block;
-
+    display: block
 }
 .sponsor-content {
     margin-left: 230px
 }
-.people-thumb {
-    float: right
-}
+
 .people-thumb img {
-    display: block;
 	max-width:200px;
-	padding:10px
+	float:right
 }
 .people-content {
-    margin-right:35%
-}
-.people-container {
-	width:100%
+	float:left
 }
