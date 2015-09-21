@@ -4,9 +4,6 @@
 
 {% block heading %}
   <div class="jumbotron">
-	  <h1>
-      {% image self.logo width-150 id="logo" %}
-		</h1>
     {% include "common/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
   </div>
 {% endblock %}

@@ -2,7 +2,7 @@
 {% get_site_root as site_root %}
 
 {# Implementation of bootstrap theme dropdown menu - shows top level links and their children #}
-<div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+<div role="navigation" class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
             <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
@@ -11,10 +11,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            {# Link to home page #}
-            <a href="{% pageurl site_root %}" class="navbar-brand" title="{{ site_root.title }}" data-placement="bottom">
-              <i class="glyphicon glyphicon-home"></i>
-            </a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -27,6 +23,7 @@
                             <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
                         {% endif %}
                     </li>
+                    <li class="navbar divider-vertical"></li>
                 {% endfor %}
             </ul>
             <form class="navbar-form navbar-right" role="search" action="{% url 'search' %}" method="get">

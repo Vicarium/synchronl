@@ -16,9 +16,13 @@
 
         {# External stylesheets #}
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+
 
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/synchro.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-social.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/synchro.css' %}" />
+
 
         {# Local static assets such as css, images and javascrpt should be stored at [yourapp]/static/[yourapp]/... #}
         {% compress css %}
@@ -65,11 +69,30 @@
       {# A shortcut to page editing that appears when logged in #}
       {% wagtailuserbar %}
 
-      {# Top bar #}
-      {% block menu %}
-          {% get_site_root as site_root %}
-          {% top_menu parent=site_root calling_page=self %}
-      {% endblock %}
+      <div class="site-header">
+      {% get_site_root as site_root %}
+
+        <div class="container">
+
+          <a href="{{ site_root.url }}" class="logo">
+            <img src="{% static 'images/g4167.png' %}" class="logo" alt="Home"></img>
+          </a>
+
+          <div class="pull-right">
+            <a href="https://www.facebook.com/synchronl" class="btn btn-social-icon btn-facebook" >
+              <i class="fa fa-facebook"></i>
+            </a>
+            <a href="https://twitter.com/synchronl" class="btn btn-social-icon btn-twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </div>
+
+        </div>
+
+        {# Top bar #}
+        {% block menu %}
+            {% top_menu parent=site_root calling_page=self %}
+        {% endblock %}
 
         {# Page heading block #}
         {% block heading %}
