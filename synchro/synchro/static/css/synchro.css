@@ -263,8 +263,8 @@ border-left-color: #111111;
   height: 100%;
   /* negative indent footer by its height */
   margin: 0 auto -120px;
-  /* pad bottom by footer height */
-  padding: 0 0 120px;
+  /* pad bottom by footer height
+  padding: 0 0 120px;*/
 }
 
 /* set the fixed height of the footer here */
@@ -278,7 +278,8 @@ footer {
 }
 
 footer > .container {
-  padding: 20px;
+  padding-top: 40px;
+	width: 970px
 }
 footer a:hover,a:focus{
 	color: #fff
@@ -370,4 +371,10 @@ iframe {
 
 .site-header .container {
 	width: 970px;
+}
+
+.site-header .pull-right {
+	height: 135px;
+ 	display: flex;
+ 	align-items: center;
 }
