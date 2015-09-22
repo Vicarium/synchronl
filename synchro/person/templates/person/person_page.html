@@ -9,17 +9,17 @@
 
 	<br>
 	<div class="row">
-	  <div class="col-md-8">
+    {% if self.biography %}
+  	  <div class="col-md-8">
 
-      {% if self.biography %}
+  		  <h3>Biography</h3>
+  		  <br>
+  	    {% include "common/includes/body.html" with body=self.biography only %}
 
-		  <h3>Biography</h3>
-		  <br>
-	    {% include "common/includes/body.html" with body=self.biography only %}
 
-      {% endif %}
+  		</div>
+    {% endif %}
 
-		</div>
     {% if self.image %}
 		<div class="col-md-4">
 
