@@ -1,7 +1,7 @@
 <div class="page-header"><h3>Contact</h3></div>
 <div class="row">
     <dl>
-      {% if contact.address_1 OR contact.address_2 OR contact.city OR contact.country %}
+      {% if contact.address_1 or contact.address_2 or contact.city or contact.country %}
         <div class="col-sm-4">
             {% if contact.address_1 %}
                 <dt>Address 1</dt>
@@ -24,7 +24,7 @@
             {% endif %}
 		    </div>
       {% endif %}
-  {% if contact.post_code OR contact.telephone OR contact.email %}
+  {% if contact.post_code or contact.telephone or contact.email %}
 		<div class="col-sm-4">
             {% if contact.post_code %}
                 <dt>Post code</dt>
