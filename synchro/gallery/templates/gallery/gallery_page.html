@@ -15,7 +15,7 @@
 
   {% include "common/includes/body.html" with body=self.body only %}
 
-	
+
   <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
   <div id="blueimp-gallery" class="blueimp-gallery">
       <div class="slides"></div>
@@ -25,15 +25,15 @@
       <a class="close">×</a>
       <a class="play-pause"></a>
       <ol class="indicator"></ol>
-  
+
   </div>
-	
+
   <!-- Images in the gallery -->
   <div id="links">
     {% for galleryimage in self.simpleimage.all %}
 
       {# First store image as two variables #}
-      {% image galleryimage.image max-80x80 as galleryicon %}
+      {% image galleryimage.image fill-80x80 as galleryicon %}
       {% image galleryimage.image width-400 as gallerylarge %}
 
       <a href="{{ gallerylarge.url }}" title="{{ gallerylarge.name }}">
