@@ -4,11 +4,21 @@
 
 {% block heading %}
   <div class="jumbotron">
-    {% include "common/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
+      {% include "common/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
   </div>
 {% endblock %}
 
 {% block content %}
+{# Facebook Embed code #}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
   <br>
     {% include "common/includes/body.html" with body=self.body only %}
 	<br>
@@ -32,6 +42,17 @@
   	  </div>
     </div>
   {% endif %}
+
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title">Facebook Feed</h3></div>
+        <div class="list-group" style="color:#ffffff">
+        <div class="fb-page" data-href="https://www.facebook.com/synchronl" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/synchronl"><a href="https://www.facebook.com/synchronl">Synchro NL</a></blockquote></div></div>
+        </div>
+  	  </div>
+    </div>
+
+
 
 {% endblock %}
 
