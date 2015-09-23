@@ -13,7 +13,7 @@ register = template.Library()
     'blog/tags/blog_listing.html',
     takes_context=True
 )
-def blog_listing(context, count=3):
+def blog_listing(context, count=4):
     blogs = BlogPage.objects.live().order_by('-date')
     return {
         'blogs': blogs[1:count].select_related('feed_image'),

@@ -20,16 +20,23 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
   <br>
-    {% include "common/includes/body.html" with body=self.body only %}
-	<br>
-	  {% blog_feature %}
+  	  {% blog_feature %}
+  <div class="row">
+    <div class="col-md-8 information-block">
+      {% image self.small_image original as sm_img %}
+      <img src="{{sm_img.url}}" class="center-block" style="max-width:600px;max-height:200px">
+      <br>
+      <br>
+      {% include "common/includes/body.html" with body=self.body only %}
+    </div>
+    <div class="col-sm-4 pull-right">
+      {% blog_listing %}
+	  </div>
+  </div>
+
   <br>
 
-
-	<div class="col-sm-4">
-    {% blog_listing %}
-	</div>
-	<div class="col-sm-4">
+  <div class="col-sm-4">
     {% event_listing %}
 	</div>
   {% if self.twitter_widget %}

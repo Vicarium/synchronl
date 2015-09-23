@@ -13,7 +13,7 @@ register = template.Library()
     'event/tags/event_listing.html',
     takes_context=True
 )
-def event_listing(context, count=2):
+def event_listing(context, count=4):
     events = EventPage.objects.live()
     events = events.filter(date_from__gte=date.today()).order_by('date_from')
     return {
