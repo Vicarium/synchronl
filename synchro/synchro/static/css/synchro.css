@@ -126,7 +126,7 @@ display: block;
 /* Navbar Vertical Dividers */
 .navbar .divider-vertical {
 height: 50px;
-margin: 0 9px;
+margin: 0 6px;
 border-right: 1px solid #ffffff;
 border-left: 0px solid #f2f2f2;
 }
