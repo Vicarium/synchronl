@@ -398,3 +398,7 @@ iframe {
 .search {
 	max-width: 210px;
 }
+
+.google-map {
+	max-width: 100%;
+}
