@@ -1,6 +1,6 @@
 
 .page-header{
-	width: 970px;
+	max-width: 970px;
 	padding-bottom:9px;
 	margin:40px auto;
 	border-bottom:1px solid #eee
