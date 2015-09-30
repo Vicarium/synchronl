@@ -394,3 +394,7 @@ iframe {
 #wagtail-userbar {
 	padding-top: 52px
 }
+
+.search {
+	max-width: 210px;
+}
