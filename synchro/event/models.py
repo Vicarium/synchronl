@@ -55,7 +55,6 @@ class EventIndexPage(Page):
 EventIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
-    InlinePanel(EventIndexPage, 'related_links', label="Related links"),
 ]
 
 EventIndexPage.promote_panels = Page.promote_panels
@@ -161,7 +160,6 @@ EventPage.content_panels = [
     InlinePanel(EventPage, 'carousel_items', label="Carousel items"),
     FieldPanel('body', classname="full"),
     InlinePanel(EventPage, 'speakers', label="Speakers"),
-    InlinePanel(EventPage, 'related_links', label="Related links"),
 ]
 
 EventPage.promote_panels = Page.promote_panels + [

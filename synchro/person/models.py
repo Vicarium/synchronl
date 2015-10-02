@@ -75,7 +75,6 @@ PersonPage.content_panels = [
     FieldPanel('biography', classname="full"),
     ImageChooserPanel('image'),
     MultiFieldPanel(ContactFields.panels, "Contact"),
-    InlinePanel(PersonPage, 'related_links', label="Related links"),
 ]
 
 PersonPage.promote_panels = Page.promote_panels + [

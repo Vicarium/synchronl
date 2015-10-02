@@ -59,7 +59,6 @@ BlogPage.content_panels = [
     FieldPanel('date'),
     FieldPanel('body', classname="full"),
     InlinePanel(BlogPage, 'carousel_items', label="Carousel items"),
-    InlinePanel(BlogPage, 'related_links', label="Related links"),
 ]
 
 BlogPage.promote_panels = Page.promote_panels + [
@@ -119,7 +118,6 @@ class BlogIndexPage(Page):
 BlogIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
-    InlinePanel(BlogIndexPage, 'related_links', label="Related links"),
 ]
 
 BlogIndexPage.promote_panels = Page.promote_panels

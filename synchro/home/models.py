@@ -29,6 +29,7 @@ class HomePage(Page):
     intro = models.TextField(blank=True)
     body = RichTextField(blank=True)
     twitter_widget = models.TextField(blank=True)
+    facebook_widget = models.TextField(blank=True)
     small_image = models.ForeignKey(
         "wagtailimages.Image",
         null=True,
@@ -49,9 +50,9 @@ HomePage.content_panels = [
     FieldPanel('intro', classname="full"),
     FieldPanel('body', classname="full"),
     FieldPanel('twitter_widget', classname="full"),
+    FieldPanel('facebook_widget', classname="full"),
     ImageChooserPanel('small_image'),
     InlinePanel(HomePage, 'carousel_items', label="Carousel items"),
-    InlinePanel(HomePage, 'related_links', label="Related links"),
 ]
 
 HomePage.promote_panels = Page.promote_panels

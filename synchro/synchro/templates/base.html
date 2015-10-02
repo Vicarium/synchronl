@@ -1,5 +1,6 @@
 {% load common_tags static cache compress wagtailuserbar %}
 {% load wagtailimages_tags static blog_tags%}
+{% get_site_root as site_root %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -21,7 +22,12 @@
 
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-social.css' %}" />
-        <link rel="stylesheet" type="text/css" href="{% static 'css/synchro.css' %}" />
+
+        {% if site_root.title == "Summit Synchro" %}
+          <link rel="stylesheet" type="text/css" href="{% static 'css/summit.css' %}" />
+        {% else %}
+          <link rel="stylesheet" type="text/css" href="{% static 'css/synchro.css' %}" />
+        {% endif %}
 
 
         {# Local static assets such as css, images and javascrpt should be stored at [yourapp]/static/[yourapp]/... #}
@@ -70,12 +76,17 @@
       {% wagtailuserbar %}
 
       <div class="site-header">
-      {% get_site_root as site_root %}
 
         <div class="container hidden-xs">
-
+          <p> root page: {{ site_root.title }}</p>
           <a href="{{ site_root.url }}" class="logo">
-            <img src="{% static 'images/g4167.png' %}" class="logo" alt="Home"></img>
+            <img src="
+              {% if site_root.title == "Summit Synchro" %}
+                /* TODO:  */
+              {% else %}
+                {% static 'images/g4167.png' %}"
+              {% endif %}
+             class="logo" alt="Home"></img>
           </a>
 
           <div class="pull-right">
@@ -89,12 +100,21 @@
                 </div>
               </div>
             </form>
+            {% if site_root.title == "Summit Synchro" %}
+            <a href="TODO" class="btn btn-social-icon btn-facebook" >
+              <i class="fa fa-facebook"></i>
+            </a>
+            <a href="TODO" class="btn btn-social-icon btn-twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+            {% else %}
             <a href="https://www.facebook.com/synchronl" class="btn btn-social-icon btn-facebook" >
               <i class="fa fa-facebook"></i>
             </a>
             <a href="https://twitter.com/synchronl" class="btn btn-social-icon btn-twitter">
               <i class="fa fa-twitter"></i>
             </a>
+            {% endif %}
           </div>
 
         </div>
@@ -139,14 +159,22 @@
   			<div class="container" role="contentinfo">
 					<div class="pull-left">
 						<ul class="list-unstyled">
-							<li>Synchro Newfoundland</li>
-              <li>synchronl@hotmail.com</li>
+              {% if site_root.title == "Summit Synchro" %}
+                /* TODO:  */
+                {% else %}
+    							<li>Synchro Newfoundland</li>
+                  <li>synchronl@hotmail.com</li>
+              {% endif %}
 						</ul>
 					</div>
 					<div class="pull-right">
-              <ul class="list-unstyled">
+            <ul class="list-unstyled">
+              {% if site_root.title == "Summit Synchro" %}
+                /* TODO:  */
+              {% else %}
                 <li>©2015 SynchroNL</li>
                 <li><a href="http://www.synchronl.com/admin">Login</a><li>
+              {% endif %}
               </ul>
           </div>
   		  </div>
