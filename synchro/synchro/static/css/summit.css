@@ -367,7 +367,9 @@ iframe {
 	max-width:970px;
 	margin:0 auto;
 	background-color: #fff;
-	padding-bottom: 50px
+	padding-bottom: 50px;
+	border-right: 1px solid #717d8c;
+	border-left: 1px solid #717d8c
 }
 
 
