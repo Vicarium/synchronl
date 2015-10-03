@@ -279,7 +279,6 @@ footer {
   background-color: #0ba8dd;
   border:0 solid #3b56b6;
   border-top-width: 1px;
-  margin-top:50px;
   color: #fff;
 }
 
@@ -291,7 +290,7 @@ footer a:hover,a:focus{
 	color: #fff
 }
 body {
-  background: #fff;
+  background: #dddddd;
   color: #000;
 }
 footer  a {
@@ -367,6 +366,8 @@ iframe {
 #main-container {
 	max-width:970px;
 	margin:0 auto;
+	background-color: #fff;
+	padding-bottom: 50px
 }
 
 
@@ -375,6 +376,9 @@ iframe {
 	max-width: 150px;
 }
 
+.site-header {
+	background-color: #fff
+}
 .site-header .container {
 	max-width: 970px;
 }
