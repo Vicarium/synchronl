@@ -12,7 +12,7 @@
 }
 
 .navbar-inverse{
-	background-color:#337ab7;border-color:#3b56b6
+	background-color:#0ba8dd;border-color:#3b56b6
 }
 .navbar-inverse .navbar-brand{
 	color:#fff
@@ -44,7 +44,7 @@
 	background-color:#23336c
 }
 .navbar-inverse .navbar-collapse,.navbar-inverse .navbar-form{
-	border-color:#337ab7
+	border-color:#0ba8dd
 }
 .navbar-inverse .navbar-nav>.open>a,.navbar-inverse .navbar-nav>.open>a:hover,.navbar-inverse .navbar-nav>.open>a:focus{
 	color:#23336c;background-color:#3b56b6
@@ -276,7 +276,7 @@ border-left-color: #111111;
 /* set the fixed height of the footer here */
 footer {
   height: 120px;
-  background-color: #337ab7;
+  background-color: #0ba8dd;
   border:0 solid #3b56b6;
   border-top-width: 1px;
   margin-top:50px;
@@ -310,13 +310,13 @@ iframe {
 
 .panel {
 	background-color: transparent;
-	border-color: #337ab7;
+	border-color: #0ba8dd;
 }
 .panel-default > .panel-heading {
-	background-color: #337ab7;
+	background-color: #0ba8dd;
 }
 .panel-title {
-	background-color: #337ab7;
+	background-color: #0ba8dd;
 	color: #fff;
 }
 #sponsors{
@@ -401,4 +401,11 @@ iframe {
 
 .google-map {
 	max-width: 100%;
+}
+.btn-primary {
+	background-color: #0ba8dd
+}
+.btn-primary:hover, .btn-primary:focus {
+	background-color: #fff;
+	color: #0ba8dd
 }
