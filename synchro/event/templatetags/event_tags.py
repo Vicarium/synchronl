@@ -14,7 +14,8 @@ register = template.Library()
     takes_context=True
 )
 def event_listing(context, count=5):
-    events = EventPage.objects.live()
+    site_root = context['request'].site.root_page
+    events = EventPage.objects.descendant_of(site_root).live()
     events = events.filter(date_from__gte=date.today()).order_by('date_from')
     return {
         'events': events[:count].select_related('feed_image'),
