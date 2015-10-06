@@ -1,9 +1,12 @@
 
 .page-header{
 	max-width: 970px;
-	padding-bottom:9px;
-	margin:40px auto;
-	border-bottom:1px solid #eee
+	padding-bottom:49px;
+	padding-top:40px;
+	margin:0px auto;
+	border-bottom:1px solid #eee;
+	background-color: white;
+	box-shadow: 0 0 10px black;
 }
 
 /* Navbar */
@@ -177,8 +180,6 @@ border-left-color: #111111;
 }
 .carousel{
 	position:relative;
-	padding-right:15px;
-	padding-left:15px;
 	max-width:970px
 }
 .carousel-inner{
