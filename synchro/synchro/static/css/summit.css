@@ -409,7 +409,7 @@ iframe {
 	max-width: 100%;
 }
 .btn-primary {
-	background-color: #0ba8dd;
+	background-color: #f58c3e;
 	border-color: #717d8c
 }
 .btn-primary:hover, .btn-primary:focus {
@@ -418,6 +418,6 @@ iframe {
 	border-color: #717d8c
 }
 .well {
-	background-color: #f58c3e;
+	background-color: #0ba8dd;
 	color: #fff
 }
