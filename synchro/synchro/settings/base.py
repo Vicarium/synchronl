@@ -70,6 +70,7 @@ INSTALLED_APPS = (
     'gdrive',
     'event',
     'document',
+    'team',
 )
 
 MIDDLEWARE_CLASSES = (

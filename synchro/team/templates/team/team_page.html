@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load blog_tags event_tags %}
+{% load wagtailimages_tags static %}
+
+{% block heading %}
+  <div class="page-header container">
+      <h1 class="text-center">{{ self.title }}</h1>
+  </div>
+  {% if self.team_photo %}
+    <div class="jumbotron">
+      {% image self.team_photo width-970 %}
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <br>
+  <div class="row">
+    <div class="col-md-6 information-block">
+      {% include "common/includes/body.html" with body=self.intro only %}
+      <br>
+      {% blog_simple_listing count=2 %}
+    </div>
+    <div class="col-sm-6 pull-right">
+      <div class="panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title">Roster</h3></div>
+        <div class="list-group">
+          {% include "common/includes/body.html" with body=self.roster only %}
+        </div>
+      </div>
+	  </div>
+  </div>
+
+
+{% endblock %}
