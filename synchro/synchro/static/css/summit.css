@@ -1,12 +1,10 @@
 
 .page-header{
 	max-width: 970px;
-	padding-bottom:49px;
-	padding-top:40px;
+	padding-bottom:9px;
+	padding-top: 40px;
 	margin:0px auto;
-	border-bottom:1px solid #eee;
-	background-color: white;
-	box-shadow: 0 0 10px black;
+	border-bottom:1px solid #eee
 }
 
 /* Navbar */
@@ -369,10 +367,16 @@ iframe {
 	margin:0 auto;
 	background-color: #fff;
 	padding-bottom: 50px;
+	padding-top:40px;
 	border-right: 1px solid #717d8c;
 	border-left: 1px solid #717d8c
 }
 
+.header-container {
+	background-color: #fff;
+	border-right: 1px solid #717d8c;
+	border-left: 1px solid #717d8c
+}
 
 /* Site-Header */
 .logo {
