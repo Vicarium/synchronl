@@ -15,6 +15,7 @@ from modelcluster.fields import ParentalKey
 
 class TeamPage(Page):
     intro = models.TextField(blank=True)
+    announcements = RichTextField(blank=True)
     roster = RichTextField(blank=True)
     team_photo = models.ForeignKey(
         "wagtailimages.Image",
@@ -26,12 +27,14 @@ class TeamPage(Page):
 
     search_fields = Page.search_fields + (
         index.SearchField('intro'),
+        index.SearchField('announcements'),
         index.SearchField('roster'),
     )
 
 TeamPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
+    FieldPanel('announcements', classname="full"),
     FieldPanel('roster', classname="full"),
     ImageChooserPanel('team_photo'),
 ]

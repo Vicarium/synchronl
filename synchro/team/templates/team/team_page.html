@@ -16,14 +16,21 @@
 {% block content %}
   <div class="row">
     <div class="col-md-6 information-block">
-      {% include "common/includes/body.html" with body=self.intro only %}
+      <div style="min-height:120px;">
+        {% include "common/includes/body.html" with body=self.intro only %}
+      </div>
       <br>
-      {% blog_simple_listing count=2 %}
+      <div class="panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title">Announcements</h3></div>
+        <div class="container" style="min-height:160px;">
+          {% include "common/includes/body.html" with body=self.announcements %}
+        </div>
+      </div>
     </div>
     <div class="col-sm-6 pull-right">
       <div class="panel panel-default">
         <div class="panel-heading"><h3 class="panel-title">Roster</h3></div>
-        <div class="list-group">
+        <div class="container" style="min-height:280px">
           {% include "common/includes/body.html" with body=self.roster only %}
         </div>
       </div>
