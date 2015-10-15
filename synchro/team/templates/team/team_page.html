@@ -14,15 +14,21 @@
 {% endblock %}
 
 {% block content %}
+  <div class="row container" style="max-width:inherit;padding-bottom:30px;">
+    {% include "common/includes/body.html" with body=self.intro only %}
+  </div>
   <div class="row">
     <div class="col-md-6 information-block">
-      <div style="min-height:120px;">
-        {% include "common/includes/body.html" with body=self.intro only %}
+      <div class="panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title">Schedule</h3></div>
+        <div class="panel-body">
+          {% include "common/includes/body.html" with body=self.schedule %}
+        </div>
       </div>
       <br>
       <div class="panel panel-default">
         <div class="panel-heading"><h3 class="panel-title">Announcements</h3></div>
-        <div class="container" style="min-height:160px;">
+        <div class="panel-body">
           {% include "common/includes/body.html" with body=self.announcements %}
         </div>
       </div>
@@ -30,7 +36,7 @@
     <div class="col-sm-6 pull-right">
       <div class="panel panel-default">
         <div class="panel-heading"><h3 class="panel-title">Roster</h3></div>
-        <div class="container" style="min-height:280px">
+        <div class="panel-body">
           {% include "common/includes/body.html" with body=self.roster only %}
         </div>
       </div>
