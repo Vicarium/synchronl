@@ -16,7 +16,7 @@ register = template.Library()
 def blog_listing(context, count=4):
     site_root = context['request'].site.root_page
     blogs = BlogPage.objects.descendant_of(site_root).live()
-    blogs = BlogPage.objects.order_by('-date')
+    blogs = blogs.order_by('-date')
     return {
         'blogs': blogs[1:count].select_related('feed_image'),
         # required by the pageurl tag that we want to use within this template
@@ -28,10 +28,10 @@ def blog_listing(context, count=4):
     'blog/tags/blog_simple_listing.html',
     takes_context=True
 )
-def blog_simple_listing(context, count=10):
+def blog_simple_listing(context, count=5):
     site_root = context['request'].site.root_page
     blogs = BlogPage.objects.descendant_of(site_root).live()
-    blogs = BlogPage.objects.order_by('-date')
+    blogs = blogs.order_by('-date')
     return {
         'blogs': blogs[:count].select_related('feed_image'),
         # required by the pageurl tag that we want to use within this template
@@ -46,9 +46,9 @@ def blog_simple_listing(context, count=10):
 def blog_feature(context, count=1):
     site_root = context['request'].site.root_page
     blogs = BlogPage.objects.descendant_of(site_root).live()
-    blogs = BlogPage.objects.order_by('-date')
+    blogs = blogs.order_by('-date')
     return {
-        'blogs': blogs[:1].select_related('feed_image'),
+        'blogs': blogs[:count].select_related('feed_image'),
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }
