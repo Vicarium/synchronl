@@ -44,7 +44,9 @@ def blog_simple_listing(context, count=10):
     takes_context=True
 )
 def blog_feature(context, count=1):
-    blogs = BlogPage.objects.live().order_by('-date')
+    site_root = context['request'].site.root_page
+    blogs = BlogPage.objects.descendant_of(site_root).live()
+    blogs = BlogPage.objects.order_by('-date')
     return {
         'blogs': blogs[:1].select_related('feed_image'),
         # required by the pageurl tag that we want to use within this template
