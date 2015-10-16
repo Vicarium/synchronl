@@ -180,12 +180,18 @@ border-left-color: #111111;
 }
 .carousel{
 	position:relative;
+	padding-right:10px;
+	padding-left:10px;
+	padding-bottom:20px;
 	max-width:970px
 }
 .carousel-inner{
 	position:relative;
 	width:100%;
-	overflow:hidden
+	overflow:hidden;
+	box-shadow: 0px 0px 10px 1px #717d8c;
+	margin-top: 10px;
+	
 }
 .carousel-inner>.item{
 	position:relative;display:none;-webkit-transition:.6s ease-in-out left;transition:.6s ease-in-out left
@@ -370,8 +376,7 @@ iframe {
 	background-color: #fff;
 	padding-bottom: 50px;
 	padding-top:40px;
-	border-right: 1px solid #717d8c;
-	border-left: 1px solid #717d8c
+	box-shadow: 0px 0px 10px 1px #717d8c
 }
 
 .header-container {
@@ -427,5 +432,7 @@ iframe {
 }
 .well {
 	background-color: #0ba8dd;
-	color: #fff
+	color: #fff;
+	border: 1px solid #717d8c
 }
+
