@@ -1,7 +1,66 @@
 {% extends "base.html" %}
+{% load common_tags %}
+
+{% block extra_css %}
+  <style>
+    .hiddenRow {
+        padding: 0 !important;
+    }
+
+    .label-tag {
+    	background-color: #F58C3E;
+    	margin-left: 0.1em;
+    	margin-right: 0.1em;
+    }
+  </style>
+{% endblock %}
+
 
 {% block left_content %}
 
-    {{ self.body }}
+  {% include "common/includes/body.html" with body=self.body only %}
 
+  <div class="panel panel-default">
+  <table class="table table-condensed" style="border-collapse:collapse;">
+    <thead class="panel-title">
+        <tr>
+            <th class="panel-title">Name</th>
+            <th>Upload Date</th>
+            <th class="hidden-xs">Tags</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for document in self.simpledocument.all %}
+        <tr data-toggle="collapse" data-target="#item{{ forloop.counter }}" class="accordion-toggle">
+            <td>{{ document.document.title }}</td>
+            <td>{{ document.document.created_at }}</td>
+            <td class="hidden-xs">
+              {% for tag in document.document.tags.all %}
+                <label class="label label-tag"> {{ tag }} </label>
+              {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6" class="hiddenRow"><div class="accordian-body collapse" id="item{{ forloop.counter }}">
+              <a href="{{document.document.url}}" class="icon icon-doc-full-inverse">
+                {{ document.document.file }}
+              </a>
+            </div> </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+  $('.accordian-body').on('show.bs.collapse', function () {
+      $(this).closest("table")
+          .find(".collapse.in")
+          .not(this)
+          .collapse('toggle')
+  })
+</script>
 {% endblock %}

@@ -43,7 +43,6 @@ class GalleryPage(Page):
     )
 
     search_fields = Page.search_fields + (
-        index.SearchField('intro'),
         index.SearchField('body'),
     )
 
