@@ -1,10 +1,15 @@
 {% if events %}
-  <div class="panel panel-default">
-    <div class="panel-heading"><h3 class="panel-title">Upcoming events</h3></div>
-    <div class="list-group">
-      {% for event in events %}
-        {% include "event/includes/event_list_item.html" %}
-      {% endfor %}
+  <div class="col-sm-4">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">Upcoming events</h3></div>
+      <div class="list-group" style="min-height:402px;">
+        {% for event in events %}
+          {% include "event/includes/event_list_item.html" %}
+        {% endfor %}
+      </div>
     </div>
+  </div>
+{% else %}
+  <div class="col-sm-2">
   </div>
 {% endif %}
