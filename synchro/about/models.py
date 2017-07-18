@@ -44,9 +44,9 @@ class AboutPage(Page, ContactFields):
         related_name='+'
     )
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('body'),
-    )
+    ]
 
 AboutPage.content_panels = [
     FieldPanel('title', classname="full title"),

@@ -34,9 +34,9 @@ class EventIndexPage(Page):
     subpage_types = ['event.EventPage']
 
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('intro'),
-    )
+    ]
 
     @property
     def events(self):
@@ -118,11 +118,11 @@ class EventPage(Page):
         related_name='+'
     )
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('get_audience_display'),
         index.SearchField('location'),
         index.SearchField('body'),
-    )
+    ]
 
     @property
     def event_index(self):
@@ -157,9 +157,9 @@ EventPage.content_panels = [
     FieldPanel('audience'),
     FieldPanel('cost'),
     FieldPanel('signup_link'),
-    InlinePanel(EventPage, 'carousel_items', label="Carousel items"),
+    InlinePanel('carousel_items', label="Carousel items"),
     FieldPanel('body', classname="full"),
-    InlinePanel(EventPage, 'speakers', label="Speakers"),
+    InlinePanel('speakers', label="Speakers"),
 ]
 
 EventPage.promote_panels = Page.promote_panels + [

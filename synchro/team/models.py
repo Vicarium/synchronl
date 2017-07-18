@@ -26,12 +26,12 @@ class TeamPage(Page):
         related_name='+'
     )
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('intro'),
         index.SearchField('schedule'),
         index.SearchField('announcements'),
         index.SearchField('roster'),
-    )
+    ]
 
 TeamPage.content_panels = [
     FieldPanel('title', classname="full title"),

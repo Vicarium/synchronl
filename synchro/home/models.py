@@ -38,9 +38,9 @@ class HomePage(Page):
         related_name='+'
     )
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('body'),
-    )
+    ]
 
     class Meta:
         verbose_name = "Homepage"
@@ -52,7 +52,7 @@ HomePage.content_panels = [
     FieldPanel('twitter_widget', classname="full"),
     FieldPanel('facebook_widget', classname="full"),
     ImageChooserPanel('small_image'),
-    InlinePanel(HomePage, 'carousel_items', label="Carousel items"),
+    InlinePanel('carousel_items', label="Carousel items"),
 ]
 
 HomePage.promote_panels = Page.promote_panels

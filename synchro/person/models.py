@@ -63,11 +63,11 @@ class PersonPage(Page, ContactFields):
         related_name='+'
     )
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('title'),
         index.SearchField('intro'),
         index.SearchField('biography'),
-    )
+    ]
 
 PersonPage.content_panels = [
     FieldPanel('title', classname='full title'),

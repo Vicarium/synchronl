@@ -42,14 +42,14 @@ class GalleryPage(Page):
         related_name='+'
     )
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('body'),
-    )
+    ]
 
 GalleryPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('body', classname="full"),
-    InlinePanel(GalleryPage, 'simpleimage', label="Images")
+    InlinePanel('simpleimage', label="Images")
 ]
 
 GalleryPage.promote_panels = Page.promote_panels + [

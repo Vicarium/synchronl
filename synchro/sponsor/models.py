@@ -39,7 +39,7 @@ class SponsorPage(Page):
 SponsorPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
-    InlinePanel(SponsorPage, 'sponsor', label="Sponsors"),
+    InlinePanel('sponsor', label="Sponsors"),
 ]
 
 

@@ -37,14 +37,14 @@ class DocumentPage(Page):
     body = RichTextField(blank=True)
 
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('body'),
-    )
+    ]
 
 DocumentPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('body', classname="full"),
-    InlinePanel(DocumentPage, 'simpledocument', label="Documents")
+    InlinePanel('simpledocument', label="Documents")
 ]
 
 

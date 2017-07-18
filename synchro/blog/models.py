@@ -45,9 +45,9 @@ class BlogPage(Page):
         related_name='+'
     )
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('body'),
-    )
+    ]
 
     @property
     def blog_index(self):
@@ -58,7 +58,7 @@ BlogPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('date'),
     FieldPanel('body', classname="full"),
-    InlinePanel(BlogPage, 'carousel_items', label="Carousel items"),
+    InlinePanel('carousel_items', label="Carousel items"),
 ]
 
 BlogPage.promote_panels = Page.promote_panels + [
@@ -77,9 +77,9 @@ class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
     subpage_types = ['blog.BlogPage']
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('intro'),
-    )
+    ]
 
     @property
     def blogs(self):

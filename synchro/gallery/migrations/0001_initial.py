@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import wagtail.wagtailadmin.taggable
+import wagtail.wagtailsearch.index
 import wagtail.wagtailimages.models
 import wagtail.wagtailcore.fields
 import modelcluster.fields
@@ -56,6 +56,6 @@ class Migration(migrations.Migration):
                 'ordering': ['sort_order'],
                 'abstract': False,
             },
-            bases=(models.Model, wagtail.wagtailadmin.taggable.TagSearchable),
+            bases=(models.Model, wagtail.wagtailsearch.index.Indexed),
         ),
     ]

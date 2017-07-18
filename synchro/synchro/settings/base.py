@@ -53,6 +53,8 @@ INSTALLED_APPS = (
     'wagtail.wagtailredirects',
     'wagtail.wagtailforms',
 
+    'wagtail.contrib.wagtailsearchpromotions',
+
     # Other 3rd party apps
 #    'twitter_tag',
 

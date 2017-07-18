@@ -20,10 +20,10 @@ class GdocPage(Page):
         related_name='+'
     )
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('intro'),
         index.SearchField('body'),
-    )
+    ]
 
 GdocPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -50,10 +50,10 @@ class GdrivePage(Page):
         related_name='+'
     )
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('intro'),
         index.SearchField('body'),
-    )
+    ]
 
 GdrivePage.content_panels = [
     FieldPanel('title', classname="full title"),
