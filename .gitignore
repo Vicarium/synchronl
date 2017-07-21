@@ -43,6 +43,7 @@ node_modules/
 # virtual environment folder
 venv*
 venv
+2ndvenv
 
 # Databases
 db.sqlite3

@@ -73,6 +73,7 @@ INSTALLED_APPS = (
     'event',
     'document',
     'team',
+    'form',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -99,6 +100,7 @@ TEMPLATES = [
         ],
         'APP_DIRS': True,
         'OPTIONS': {
+            'builtins': ['overextends.templatetags.overextends_tags'],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -159,7 +161,10 @@ MEDIA_URL = '/media/'
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "synchro"
+WAGTAIL_SITE_NAME = "Synchro"
+WAGTAILADMIN_RECENT_EDITS_LIMIT = 5
+WAGTAIL_ENABLE_UPDATE_CHECK = False
+TAGGIT_CASE_INSENSITIVE = True
 
 
 # Twitter settings
