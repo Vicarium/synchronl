@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block left_content %}
+
+
+
+<h4>Click the button below to being the payment process.</h4>
+<h5> Please do not leave this page before process is complete.</h5>
+
+<br>
+
+{% if site_root.title == "Summit Synchro" %}
+<form action="/payment/stripe?amount={{ page.payment_amount }}" method="POST">
+    {% csrf_token %}
+    <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_ctAzehFAZmN9t84hYpTYqXcS"
+        data-amount="{{ page.payment_amount }}"
+        data-name="Summit Synchro"
+        data-description="{{ page.payment_description }}"
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+        data-locale="auto"
+        data-currency="cad">
+    </script>
+</form>
+{% else %}
+<form action="/payment/stripe?amount={{ page.payment_amount }}" method="POST">
+    {% csrf_token %}
+    <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_AaMvBsxneq9gkfu6UjzkvInK"
+        data-amount="{{ page.payment_amount }}"
+        data-name="SynchoNL"
+        data-description="{{ page.payment_description }}"
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+        data-locale="auto"
+        data-currency="cad">
+    </script>
+</form>
+{% endif %}
+
+
+  <br>
+  {% include "common/includes/body.html" with body=self.thank_you_text only %}
+
+{% endblock %}

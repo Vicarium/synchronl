@@ -6,6 +6,8 @@ from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 
+from payment import urls as payment_urls
+
 from search.views import search
 
 
@@ -16,6 +18,9 @@ urlpatterns = [
     url(r'^documents/', include(wagtaildocs_urls)),
 
     url(r'^search/$', search, name='search'),
+
+    # payment url for stripe checkout
+    url(r'^payment/', include(payment_urls)),
 
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's serving mechanism
