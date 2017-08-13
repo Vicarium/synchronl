@@ -11,8 +11,9 @@
 <br>
 
 {% if site_root.title == "Summit Synchro" %}
-<form action="/payment/stripe?amount={{ page.payment_amount }}" method="POST">
+<form action="/payment/stripe/amount={{ page.payment_amount }}/" method="POST">
     {% csrf_token %}
+    <input type="hidden" name="thank_you_text" value="{{ page.thank_you_text }}"></input>
     <script
         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="pk_test_ctAzehFAZmN9t84hYpTYqXcS"
@@ -25,8 +26,9 @@
     </script>
 </form>
 {% else %}
-<form action="/payment/stripe?amount={{ page.payment_amount }}" method="POST">
+<form action="/payment/stripe/amount={{ page.payment_amount }}/" method="POST">
     {% csrf_token %}
+    <input type="hidden" name="thank_you_text" value="{{ page.thank_you_text }}"></input>
     <script
         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="pk_test_AaMvBsxneq9gkfu6UjzkvInK"
@@ -39,9 +41,5 @@
     </script>
 </form>
 {% endif %}
-
-
-  <br>
-  {% include "common/includes/body.html" with body=self.thank_you_text only %}
 
 {% endblock %}

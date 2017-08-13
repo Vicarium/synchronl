@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'^search/$', search, name='search'),
 
     # payment url for stripe checkout
-    url(r'^payment/', include(payment_urls)),
+    url(r'^payment/', include(payment_urls), name="payment"),
 
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's serving mechanism

@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.views import View
 
 import stripe
@@ -19,7 +20,7 @@ class StripePaymentView(View):
             return 0
 
 
-    def post(self, request):
+    def post(self, request, payment_amount):
 
         # Testing Secret Key, replace with live key in production
         stripe.api_key = "sk_test_wS0FFI9b3H0MRN0MStur2u2Z"
@@ -31,10 +32,11 @@ class StripePaymentView(View):
 
         # Charge the user's card:
         charge = stripe.Charge.create(
-        amount=self.clean_amount(self.kwargs['amount'])
+        amount=self.clean_amount(payment_amount),
         currency="cad",
         description="Example charge",
         source=token,
         )
 
-        return HttpResponseRedirect('/')
+        context = {'thank_you_text': request.POST['thank_you_text']}
+        return render(request, 'payment/payment_page_success.html', context)
