@@ -1,5 +1,7 @@
 'use strict';
 
+// registerHalloPlugin must be implemented here so it can be used by plugins
+// hooked in with insert_editor_js (and hallo-bootstrap.js runs too late)
 var halloPlugins = {
     halloformat: {},
     halloheadings: {formatBlocks: ['p', 'h2', 'h3', 'h4', 'h5']},
@@ -14,69 +16,44 @@ function registerHalloPlugin(name, opts) {
     halloPlugins[name] = (opts || {});
 }
 
-function makeRichTextEditable(id) {
-    var input = $('#' + id);
-    var richText = $('<div class="richtext"></div>').html(input.val());
-    richText.insertBefore(input);
-    input.hide();
+// Compare two date objects. Ignore minutes and seconds.
+function dateEqual(x, y) {
+    return x.getDate() === y.getDate() &&
+           x.getMonth() === y.getMonth() &&
+           x.getYear() === y.getYear()
+}
 
-    var removeStylingPending = false;
-    function removeStyling() {
-        /* Strip the 'style' attribute from spans that have no other attributes.
-        (we don't remove the span entirely as that messes with the cursor position,
-        and spans will be removed anyway by our whitelisting)
-        */
-        $('span[style]', richText).filter(function() {
-            return this.attributes.length === 1;
-        }).removeAttr('style');
-        removeStylingPending = false;
+/*
+Remove the xdsoft_current css class from markup unless the selected date is currently in view.
+Keep the normal behaviour if the home button is clicked.
+ */
+function hideCurrent(current, input) {
+    var selected = new Date(input[0].value);
+    if (!dateEqual(selected, current)) {
+        $(this).find('.xdsoft_datepicker .xdsoft_current:not(.xdsoft_today)').removeClass('xdsoft_current');
     }
-
-    var closestObj = input.closest('.object');
-
-    richText.hallo({
-        toolbar: 'halloToolbarFixed',
-        toolbarCssClass: (closestObj.hasClass('full')) ? 'full' : (closestObj.hasClass('stream-field')) ? 'stream-field' : '',
-        plugins: halloPlugins
-    }).bind('hallomodified', function(event, data) {
-        input.val(data.content);
-        if (!removeStylingPending) {
-            setTimeout(removeStyling, 100);
-            removeStylingPending = true;
-        }
-    }).bind('paste', function(event, data) {
-        setTimeout(removeStyling, 1);
-    });
 }
 
-function insertRichTextDeleteControl(elem) {
-    var a = $('<a class="icon icon-cross text-replace delete-control">Delete</a>');
-    $(elem).addClass('rich-text-deletable').prepend(a);
-    a.click(function() {
-        $(elem).fadeOut(function() {
-            $(elem).remove();
-        });
-    });
-}
-
-function initDateChooser(id) {
+function initDateChooser(id, opts) {
     if (window.dateTimePickerTranslations) {
-        $('#' + id).datetimepicker({
+        $('#' + id).datetimepicker($.extend({
             closeOnDateSelect: true,
             timepicker: false,
-            scrollInput:false,
+            scrollInput: false,
             format: 'Y-m-d',
             i18n: {
                 lang: window.dateTimePickerTranslations
             },
-            lang: 'lang'
-        });
+            lang: 'lang',
+            onGenerate: hideCurrent
+        }, opts || {}));
     } else {
-        $('#' + id).datetimepicker({
+        $('#' + id).datetimepicker($.extend({
             timepicker: false,
-            scrollInput:false,
-            format: 'Y-m-d'
-        });
+            scrollInput: false,
+            format: 'Y-m-d',
+            onGenerate: hideCurrent
+        }, opts || {}));
     }
 }
 
@@ -85,7 +62,7 @@ function initTimeChooser(id) {
         $('#' + id).datetimepicker({
             closeOnDateSelect: true,
             datepicker: false,
-            scrollInput:false,
+            scrollInput: false,
             format: 'H:i',
             i18n: {
                 lang: window.dateTimePickerTranslations
@@ -100,37 +77,24 @@ function initTimeChooser(id) {
     }
 }
 
-function initDateTimeChooser(id) {
+function initDateTimeChooser(id, opts) {
     if (window.dateTimePickerTranslations) {
-        $('#' + id).datetimepicker({
+        $('#' + id).datetimepicker($.extend({
             closeOnDateSelect: true,
             format: 'Y-m-d H:i',
-            scrollInput:false,
+            scrollInput: false,
             i18n: {
                 lang: window.dateTimePickerTranslations
             },
-            language: 'lang'
-        });
+            language: 'lang',
+            onGenerate: hideCurrent
+        }, opts || {}));
     } else {
-        $('#' + id).datetimepicker({
-            format: 'Y-m-d H:i'
-        });
+        $('#' + id).datetimepicker($.extend({
+            format: 'Y-m-d H:i',
+            onGenerate: hideCurrent
+        }, opts || {}));
     }
-}
-
-function initTagField(id, autocompleteUrl) {
-    $('#' + id).tagit({
-        autocomplete: {source: autocompleteUrl},
-        preprocessTag: function(val) {
-            // Double quote a tag if it contains a space
-            // and if it isn't already quoted.
-            if (val && val[0] != '"' && val.indexOf(' ') > -1) {
-                return '"' + val + '"';
-            }
-
-            return val;
-        }
-    });
 }
 
 function InlinePanel(opts) {
@@ -156,6 +120,7 @@ function InlinePanel(opts) {
             $('#' + deleteInputId).val('1');
             $('#' + childId).addClass('deleted').slideUp(function() {
                 self.updateMoveButtonDisabledStates();
+                self.updateAddButtonState();
                 self.setHasContent();
             });
         });
@@ -167,7 +132,7 @@ function InlinePanel(opts) {
                 var currentChildOrder = currentChildOrderElem.val();
 
                 /* find the previous visible 'inline_child' li before this one */
-                var prevChild = currentChild.prev(':visible');
+                var prevChild = currentChild.prevAll(':not(.deleted)').first();
                 if (!prevChild.length) return;
                 var prevChildOrderElem = prevChild.find('input[name$="-ORDER"]');
                 var prevChildOrder = prevChildOrderElem.val();
@@ -188,7 +153,7 @@ function InlinePanel(opts) {
                 var currentChildOrder = currentChildOrderElem.val();
 
                 /* find the next visible 'inline_child' li after this one */
-                var nextChild = currentChild.next(':visible');
+                var nextChild = currentChild.nextAll(':not(.deleted)').first();
                 if (!nextChild.length) return;
                 var nextChildOrderElem = nextChild.find('input[name$="-ORDER"]');
                 var nextChildOrder = nextChildOrderElem.val();
@@ -210,6 +175,7 @@ function InlinePanel(opts) {
         if ($('#' + deleteInputId).val() === '1') {
             $('#' + childId).addClass('deleted').hide(0, function() {
                 self.updateMoveButtonDisabledStates();
+                self.updateAddButtonState();
                 self.setHasContent();
             });
 
@@ -226,6 +192,19 @@ function InlinePanel(opts) {
                 $('ul.controls .inline-child-move-up', this).toggleClass('disabled', i === 0).toggleClass('enabled', i !== 0);
                 $('ul.controls .inline-child-move-down', this).toggleClass('disabled', i === forms.length - 1).toggleClass('enabled', i != forms.length - 1);
             });
+        }
+    };
+
+    self.updateAddButtonState = function() {
+        if (opts.maxForms) {
+            var forms = self.formsUl.children('li:visible');
+            var addButton = $('#' + opts.formsetPrefix + '-ADD');
+
+            if (forms.length >= opts.maxForms) {
+                addButton.addClass('disabled');
+            } else {
+                addButton.removeClass('disabled');
+            }
         }
     };
 
@@ -270,6 +249,7 @@ function InlinePanel(opts) {
             }
 
             self.updateMoveButtonDisabledStates();
+            self.updateAddButtonState();
 
             if (opts.onAdd) opts.onAdd();
         }
@@ -279,23 +259,34 @@ function InlinePanel(opts) {
 }
 
 function cleanForSlug(val, useURLify) {
-    if (URLify != undefined && useURLify !== false) { // Check to be sure that URLify function exists, and that we want to use it.
-        return URLify(val, val.length);
-    } else { // If not just do the "replace"
-        return val.replace(/\s/g, '-').replace(/[^A-Za-z0-9\-\_]/g, '').toLowerCase();
+    if (useURLify) {
+        // URLify performs extra processing on the string (e.g. removing stopwords) and is more suitable
+        // for creating a slug from the title, rather than sanitising a slug entered manually
+        return URLify(val, 255, unicodeSlugsEnabled);
+    } else {
+        // just do the "replace"
+        if (unicodeSlugsEnabled) {
+            return val.replace(/\s/g, '-').replace(/[&\/\\#,+()$~%.'":`@\^!*?<>{}]/g, '').toLowerCase();
+        } else {
+            return val.replace(/\s/g, '-').replace(/[^A-Za-z0-9\-\_]/g, '').toLowerCase();
+        }
     }
 }
 
 function initSlugAutoPopulate() {
+    var slugFollowsTitle = false;
+
     $('#id_title').on('focus', function() {
-        $('#id_slug').data('previous-val', $('#id_slug').val());
-        $(this).data('previous-val', $(this).val());
+        /* slug should only follow the title field if its value matched the title's value at the time of focus */
+        var currentSlug = $('#id_slug').val();
+        var slugifiedTitle = cleanForSlug(this.value, true);
+        slugFollowsTitle = (currentSlug == slugifiedTitle);
     });
 
     $('#id_title').on('keyup keydown keypress blur', function() {
-        if ($('body').hasClass('create') || (!$('#id_slug').data('previous-val').length || cleanForSlug($('#id_title').data('previous-val')) === $('#id_slug').data('previous-val'))) {
-            // only update slug if the page is being created from scratch, if slug is completely blank, or if title and slug prior to typing were identical
-            $('#id_slug').val(cleanForSlug($('#id_title').val()));
+        if (slugFollowsTitle) {
+            var slugifiedTitle = cleanForSlug(this.value, true);
+            $('#id_slug').val(slugifiedTitle);
         }
     });
 }
@@ -323,7 +314,7 @@ function initErrorDetection() {
 
     // now identify them on each tab
     for (var index in errorSections) {
-        $('.tab-nav a[href=#' + index + ']').addClass('errors').attr('data-count', errorSections[index]);
+        $('.tab-nav a[href="#' + index + '"]').addClass('errors').attr('data-count', errorSections[index]);
     }
 }
 
@@ -335,7 +326,7 @@ function initCollapsibleBlocks() {
             $fieldset.hide();
         }
 
-        $li.find('h2').click(function() {
+        $li.find('> h2').click(function() {
             if (!$li.hasClass('collapsed')) {
                 $li.addClass('collapsed');
                 $fieldset.hide('slow');
@@ -347,88 +338,91 @@ function initCollapsibleBlocks() {
     });
 }
 
+function initKeyboardShortcuts() {
+    Mousetrap.bind(['mod+p'], function(e) {
+        $('.action-preview').trigger('click');
+        return false;
+    });
+
+    Mousetrap.bind(['mod+s'], function(e) {
+        $('.action-save').trigger('click');
+        return false;
+    });
+}
+
 $(function() {
-    initSlugAutoPopulate();
+    /* Only non-live pages should auto-populate the slug from the title */
+    if (!$('body').hasClass('page-is-live')) {
+        initSlugAutoPopulate();
+    }
+
     initSlugCleaning();
     initErrorDetection();
     initCollapsibleBlocks();
+    initKeyboardShortcuts();
 
-    $('.richtext [contenteditable="false"]').each(function() {
-        insertRichTextDeleteControl(this);
+    //
+    // Preview
+    //
+    // In order to make the preview truly reliable, the preview page needs
+    // to be perfectly independent from the edit page,
+    // from the browser perspective. To pass data from the edit page
+    // to the preview page, we send the form after each change
+    // and save it inside the user session.
+
+    var $previewButton = $('.action-preview'), $form = $('#page-edit-form');
+    var previewUrl = $previewButton.data('action');
+    var autoUpdatePreviewDataTimeout = -1;
+
+    function setPreviewData() {
+        return $.ajax({
+            url: previewUrl,
+            method: 'POST',
+            data: new FormData($form[0]),
+            processData: false,
+            contentType: false
+        });
+    }
+
+    $previewButton.one('click', function () {
+        if ($previewButton.data('auto-update')) {
+            // Form data is changed when field values are changed
+            // (change event), when HTML elements are added, modified, moved,
+            // and deleted (DOMSubtreeModified event), and we need to delay
+            // setPreviewData when typing to avoid useless extra AJAX requests
+            // (so we postpone setPreviewData when keyup occurs).
+            // TODO: Replace DOMSubtreeModified with a MutationObserver.
+            $form.on('change keyup DOMSubtreeModified', function () {
+                clearTimeout(autoUpdatePreviewDataTimeout);
+                autoUpdatePreviewDataTimeout = setTimeout(setPreviewData, 1000);
+            }).change();
+        }
     });
 
-    /* Set up behaviour of preview button */
-    var previewWindow = null;
-    $('.action-preview').click(function(e) {
+    $previewButton.click(function(e) {
         e.preventDefault();
         var $this = $(this);
+        var $icon = $this.filter('.icon'),
+            thisPreviewUrl = $this.data('action');
+        $icon.addClass('icon-spinner').removeClass('icon-view');
+        var previewWindow = window.open('', thisPreviewUrl);
+        previewWindow.focus();
 
-        if (previewWindow) {
-            previewWindow.close();
-        }
-
-        previewWindow = window.open($this.data('placeholder'), $this.data('windowname'));
-
-        if (/MSIE/.test(navigator.userAgent)) {
-            // If IE, load contents immediately without fancy effects
-            submitPreview.call($this, false);
-        } else {
-            previewWindow.onload = function() {
-                submitPreview.call($this, true);
+        setPreviewData().done(function (data) {
+            if (data['is_valid']) {
+                previewWindow.document.location = thisPreviewUrl;
+            } else {
+                window.focus();
+                previewWindow.close();
+                // TODO: Stop sending the form, as it removes file data.
+                $form.submit();
             }
-        }
-
-        function submitPreview(enhanced) {
-            var previewDoc = previewWindow.document;
-
-            $.ajax({
-                type: 'POST',
-                url: $this.data('action'),
-                data: $('#page-edit-form').serialize(),
-                success: function(data, textStatus, request) {
-                    if (request.getResponseHeader('X-Wagtail-Preview') == 'ok') {
-                        if (enhanced) {
-                            var frame = previewDoc.getElementById('preview-frame');
-
-                            frame = frame.contentWindow || frame.contentDocument.document || frame.contentDocument;
-                            frame.document.open();
-                            frame.document.write(data);
-                            frame.document.close();
-
-                            var hideTimeout = setTimeout(function() {
-                                previewDoc.getElementById('loading-spinner-wrapper').className += ' remove';
-                                clearTimeout(hideTimeout);
-                            })
-
- // just enough to give effect without adding discernible slowness
-                        } else {
-                            previewDoc.open();
-                            previewDoc.write(data);
-                            previewDoc.close()
-                        }
-
-                    } else {
-                        previewWindow.close();
-                        document.open();
-                        document.write(data);
-                        document.close();
-                    }
-                },
-
-                error: function(xhr, textStatus, errorThrown) {
-                    /* If an error occurs, display it in the preview window so that
-                    we aren't just showing the spinner forever. We preserve the original
-                    error output rather than giving a 'friendly' error message so that
-                    developers can debug template errors. (On a production site, we'd
-                    typically be serving a friendly custom 500 page anyhow.) */
-
-                    previewDoc.open();
-                    previewDoc.write(xhr.responseText);
-                    previewDoc.close();
-                }
-            });
-
-        }
-
+        }).fail(function () {
+            alert('Error while sending preview data.');
+            window.focus();
+            previewWindow.close();
+        }).always(function () {
+            $icon.addClass('icon-view').removeClass('icon-spinner');
+        });
     });
 });
