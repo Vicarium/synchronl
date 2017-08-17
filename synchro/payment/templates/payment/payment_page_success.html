@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block heading %}
+  <div class="page-header header-container container">
+      <h1>Payment Successful</h1>
+  </div>
+{% endblock %}
+
+
+{% block left_content %}
+
+  {% include "common/includes/body.html" with body=thank_you_text only %}
+
+{% endblock %}

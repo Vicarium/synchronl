@@ -76,6 +76,7 @@ INSTALLED_APPS = (
     'document',
     'team',
     'form',
+    'payment',
 )
 
 MIDDLEWARE_CLASSES = (
