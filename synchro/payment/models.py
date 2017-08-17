@@ -20,7 +20,7 @@ class PaymentPage(AbstractEmailForm):
     thank_you_text = RichTextField(blank=True)
 
     payment_amount = models.TextField(verbose_name='Payment Amount', blank=False, default="0",
-                                      help_text='Please use the following format: XX.XX, for example: use 21.00 for $21 dolars.')
+                                      help_text='Please use full amount without any periods, for example: use 21.00 for $21 dollars.')
     payment_description = models.TextField(verbose_name="Payment Description", blank=False, default="")
 
     content_panels = AbstractEmailForm.content_panels + [
