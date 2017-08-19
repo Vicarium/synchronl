@@ -14,13 +14,14 @@
 <form action="/payment/stripe/amount={{ page.payment_amount }}/" method="POST">
     {% csrf_token %}
     <input type="hidden" name="thank_you_text" value="{{ page.thank_you_text }}"></input>
+    <input type="hidden" name="payment_description" value="{{ page.payment_description }}"></input>
     <script
         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="pk_test_ctAzehFAZmN9t84hYpTYqXcS"
         data-amount="{{ page.payment_amount }}"
         data-name="Summit Synchro"
         data-description="{{ page.payment_description }}"
-        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+        data-image="http://www.synchronl.com/static/images/g4167.png"
         data-locale="auto"
         data-currency="cad">
     </script>
@@ -29,13 +30,14 @@
 <form action="/payment/stripe/amount={{ page.payment_amount }}/" method="POST">
     {% csrf_token %}
     <input type="hidden" name="thank_you_text" value="{{ page.thank_you_text }}"></input>
+    <input type="hidden" name="payment_description" value="{{ page.payment_description }}"></input>
     <script
         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="pk_test_AaMvBsxneq9gkfu6UjzkvInK"
         data-amount="{{ page.payment_amount }}"
         data-name="SynchoNL"
         data-description="{{ page.payment_description }}"
-        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+        data-image="http://www.synchronl.com/static/images/g4167.png"
         data-locale="auto"
         data-currency="cad">
     </script>
