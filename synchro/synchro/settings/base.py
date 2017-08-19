@@ -20,7 +20,10 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-ALLOWED_HOSTS = ['summitsynchro.synchronl.com', 'synchronl.com', 'www.synchronl.com']
+ALLOWED_HOSTS = ['summitsynchro.synchronl.com',
+                 'synchronl.com',
+                 'www.synchronl.com',
+                 '127.0.0.1']
 
 
 # Application definition
