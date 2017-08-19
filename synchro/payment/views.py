@@ -28,13 +28,17 @@ class StripePaymentView(View):
         # Get the payment token ID submitted by the form:
         token = request.POST['stripeToken']
 
-        # Get the amount from the url keywords
+        # Get payment description from form
+        payment_description = request.POST.get('payment_description', 'Synchro online payment')
+
+        # Get and clean the amount from the url keywords
+        cleaned_amount = self.clean_amount(payment_amount)
 
         # Charge the user's card:
         charge = stripe.Charge.create(
-        amount=self.clean_amount(payment_amount),
+        amount=cleaned_amount,
         currency="cad",
-        description="Example charge",
+        description=payment_description,
         source=token,
         )
 
