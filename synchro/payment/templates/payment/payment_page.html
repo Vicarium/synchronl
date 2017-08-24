@@ -26,6 +26,13 @@ ul {
 {% block left_content %}
     {% include "common/includes/intro.html" with intro=self.intro only %}
 	<br>
+
+    {% if error_message %}
+    <div class="alert alert-danger">
+      <strong>Error: </strong>{{ error_message }}
+    </div>
+    {% endif %}
+
     <form action="{% pageurl page %}" method="POST">
         {% csrf_token %}
         {{ form.as_p }}

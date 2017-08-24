@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime, timedelta
 
 from django.db import models
 from django.http import HttpResponse
@@ -23,8 +23,22 @@ EVENT_AUDIENCE_CHOICES = (
 )
 
 
-# Event index page
+EVENT_TYPE_CHOICES = (
+    ('other', "Other"),
+    ('camp', "Camp"),
+    ('celebration', "Celebration"),
+    ('competition', "Competition"),
+    ('meeting', "Meeting"),
+)
 
+# Generate a start date for datetime fields
+def default_start_date():
+    now = datetime.today()
+    start = now + timedelta(days=1)
+    return start
+
+
+# Event index page
 class EventIndexPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('event.EventIndexPage', related_name='related_links')
 
@@ -95,19 +109,22 @@ class EventPageSpeaker(Orderable, LinkFields):
 
 
 class EventPage(Page):
-    date_from = models.DateField("Start date")
-    date_to = models.DateField(
-        "End date",
+    date_from = models.DateTimeField(
+        "Start",
+        null=False,
+        blank=False,
+        default=default_start_date()
+    )
+    date_to = models.DateTimeField(
+        "End",
         null=True,
         blank=True,
-        help_text="Not required if event is on a single day"
     )
-    time_from = models.TimeField("Start time", null=True, blank=True)
-    time_to = models.TimeField("End time", null=True, blank=True)
     audience = models.CharField(max_length=255, choices=EVENT_AUDIENCE_CHOICES)
     location = models.CharField(max_length=255)
     body = RichTextField(blank=True)
     cost = models.CharField(max_length=255)
+    event_type = models.CharField(max_length=32, choices=EVENT_TYPE_CHOICES, default=EVENT_TYPE_CHOICES[0])
     signup_link = models.URLField(blank=True)
     parent_page_types = ['event.EventIndexPage']
     feed_image = models.ForeignKey(
@@ -128,6 +145,7 @@ class EventPage(Page):
     def event_index(self):
         # Find closest ancestor which is an event index
         return self.get_ancestors().type(EventIndexPage).last()
+
 
     def serve(self, request):
         if "format" in request.GET:
@@ -151,9 +169,8 @@ EventPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('date_from'),
     FieldPanel('date_to'),
-    FieldPanel('time_from'),
-    FieldPanel('time_to'),
     FieldPanel('location'),
+    FieldPanel('event_type'),
     FieldPanel('audience'),
     FieldPanel('cost'),
     FieldPanel('signup_link'),
