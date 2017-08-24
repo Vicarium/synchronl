@@ -1,4 +1,6 @@
 from django.db import models
+from django.shortcuts import render
+
 
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (
@@ -49,6 +51,7 @@ class PaymentPage(AbstractEmailForm):
         ], "Email"),
     ]
 
+
     def get_context(self, request, *args, **kwargs):
         context = super(PaymentPage, self).get_context(request, *args, **kwargs)
 
@@ -56,16 +59,34 @@ class PaymentPage(AbstractEmailForm):
         if request.method == 'POST':
             if not context["page"].payment_amount:
                 amount = self.clean_amount(request.POST.get("payment-amount"))
-                context["page"].payment_amount = amount
             else:
                 amount = self.clean_amount(context["page"].payment_amount)
-                context["page"].payment_amount = amount
+
+            context["page"].payment_amount = amount
+
+            if not amount:
+                context["error_message"] = "Invalid Payment Amount."
+            else:
+                context["error_message"] = None
 
         return context
 
 
     def clean_amount(self, amount):
-        # Regular expressions checking for a string with only digits and
+        """Takes a monetary amount and returns it as cents with no symbols.
+
+        Returns either int or Null if amount string is invalid.
+        """
+
+        # Strip out "$" symbols from start and end of string
+        amount = amount.strip("$")
+
+        # Append cents if not present
+        if "." not in amount:
+            amount += ".00"
+
+        # Check result for valid amount. More specifically use a
+        # regular expression checking for a string with only digits and
         # an optional decimal point plus one or two more digits
         match = re.match(r'\d+(?:\.\d{1,2})?$', amount)
 
@@ -73,4 +94,46 @@ class PaymentPage(AbstractEmailForm):
         if match:
             return int(amount.replace('.',''))
         else:
-            return 0
+            return None
+
+
+    def serve(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            form = self.get_form(request.POST, page=self, user=request.user)
+
+            if form.is_valid():
+
+                # Get context
+                context = self.get_context(request)
+
+                # If theres an error render form page with error message
+                if context['error_message']:
+
+                    form = self.get_form(page=self, user=request.user)
+                    context['form'] = form
+
+                    return render(
+                        request,
+                        self.get_template(request),
+                        context
+                    )
+
+                self.process_form_submission(form)
+
+                # render the landing_page
+                # TODO: It is much better to redirect to it
+                return render(
+                    request,
+                    self.get_landing_page_template(request),
+                    context,
+                    )
+        else:
+            form = self.get_form(page=self, user=request.user)
+
+        context = self.get_context(request)
+        context['form'] = form
+        return render(
+            request,
+            self.get_template(request),
+            context
+        )

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block heading %}
+  <div class="page-header header-container container">
+      <h1>Payment Unsuccessful</h1>
+  </div>
+{% endblock %}
+
+
+{% block left_content %}
+
+  <h5>Sorry, an error has occured with the payment:</h5>
+
+  {{ error_text }}
+
+{% endblock %}
