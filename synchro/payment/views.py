@@ -46,7 +46,8 @@ class StripePaymentView(View):
             context = {'thank_you_text': request.POST['thank_you_text']}
             return render(request, 'payment/payment_page_success.html', context)
         else:
-            context = {'error_text': charge_result[1].message}
+            print("render error")
+            context = {'error_message': charge_result[1]._message}
             return render(request, 'payment/payment_error_page.html', context)
 
 
@@ -68,8 +69,8 @@ class StripePaymentView(View):
                     source=stripe_token,
                 )
 
-            except stripe.CardError as ce:
+            except stripe.StripeError as se:
                 # charge failed
-                return False, ce
+                return False, se
 
             return True, response

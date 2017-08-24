@@ -10,8 +10,8 @@
 
 {% block left_content %}
 
-  <h5>Sorry, an error has occured with the payment:</h5>
-
-  {{ error_text }}
+  <h4 class="alert alert-danger">
+    <strong>Error: </strong>{{ error_message }}
+  </h4>
 
 {% endblock %}
