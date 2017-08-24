@@ -26,6 +26,8 @@ ALLOWED_HOSTS = ['summitsynchro.synchronl.com',
                  '127.0.0.1']
 
 
+DEBUG = False
+
 # Application definition
 
 INSTALLED_APPS = (

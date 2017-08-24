@@ -65,6 +65,10 @@ class PaymentPage(AbstractEmailForm):
 
 
     def clean_amount(self, amount):
+        
+        if "." not in amount:
+            amount += ".00"
+
         # Regular expressions checking for a string with only digits and
         # an optional decimal point plus one or two more digits
         match = re.match(r'\d+(?:\.\d{1,2})?$', amount)
