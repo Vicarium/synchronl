@@ -28,6 +28,7 @@ EVENT_TYPE_CHOICES = (
     ('camp', "Camp"),
     ('celebration', "Celebration"),
     ('competition', "Competition"),
+    ('fundraiser', "Fundraiser"),
     ('meeting', "Meeting"),
 )
 
@@ -146,6 +147,18 @@ class EventPage(Page):
         # Find closest ancestor which is an event index
         return self.get_ancestors().type(EventIndexPage).last()
 
+    def get_color(self):
+
+        color_choices = {
+            'other': "sandybrown",
+            'camp': "goldenrod",
+            'celebration': "limegreen",
+            'competition': "blue",
+            'fundraiser': "aqua",
+            'meeting': "purple",
+        }
+
+        return color_choices[self.event_type]
 
     def serve(self, request):
         if "format" in request.GET:
