@@ -20,6 +20,14 @@
 		margin: 0 auto;
 	}
 
+	.fc-time {
+   		display: none;
+	}
+
+	.fc-list-item-time {
+		display: none;
+	}
+
 </style>
 
 {% endblock %}
@@ -60,6 +68,7 @@
 							end: '{{ event.date_to.isoformat }}',
 							{% endif %}
 							url: '{{ event.url }}',
+							color: '{{ event.get_color }}'
 						},
 						{% endfor %}
 					{% endif %}
@@ -76,19 +85,6 @@
 
 {% block left_content %}
     {% include "common/includes/intro.html" with intro=self.intro only %}
-	<br>
-    {# Uses method defined in models.py to retrieve all upcoming events #}
-    {# See also standard index for creating a listing with a tag #}
-    {% with self.events.all as events %}
-        {% if events %}
-            <div class="list-group">
-                {% for event in events %}
-                    {% include "event/includes/event_list_item.html" %}
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
-
 
 	{# Calendar gets placed here #}
 	<div id='loading'>loading calendar...</div>
