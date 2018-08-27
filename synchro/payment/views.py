@@ -22,8 +22,21 @@ class StripePaymentView(View):
 
     def post(self, request, payment_amount):
 
-        # Testing Secret Key, replace with live key in production
-        stripe.api_key = "sk_live_Bh53yf5cTyWc4whGyczJyGUt"
+        # Testing Secret Keys, replace with live key in production
+        # SynchroNL
+        synchronl_api_key = "sk_test_wS0FFI9b3H0MRN0MStur2u2Z"
+
+        # Summit
+        summit_api_key = "sk_test_JsmraD2gATrY0tWxqWcQg9MN"
+
+        # Set which api key to use
+        site_title = request.POST['site_title']
+
+        if site_title == "Summit Synchro":
+            stripe.api_key = summit_api_key
+        else:
+            stripe.api_key = synchronl_api_key
+
 
         # Get the payment token ID submitted by the form:
         token = request.POST['stripeToken']

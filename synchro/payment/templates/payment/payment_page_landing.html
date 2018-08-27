@@ -15,9 +15,10 @@
     {% csrf_token %}
     <input type="hidden" name="thank_you_text" value="{{ page.thank_you_text }}"></input>
     <input type="hidden" name="payment_description" value="{{ page.payment_description }}"></input>
+    <input type="hidden" name="site_title" value="Summit Synchro"></input>
     <script
         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="pk_test_ctAzehFAZmN9t84hYpTYqXcS"
+        data-key="pk_test_JhvaJ45ZsiFv5al6OHQk8WUW"
         data-amount="{{ page.payment_amount }}"
         data-name="Summit Synchro"
         data-description="{{ page.payment_description }}"
@@ -31,11 +32,12 @@
     {% csrf_token %}
     <input type="hidden" name="thank_you_text" value="{{ page.thank_you_text }}"></input>
     <input type="hidden" name="payment_description" value="{{ page.payment_description }}"></input>
+    <input type="hidden" name="site_title" value="SynchroNL"></input>
     <script
         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="pk_live_uDCRXAudQVruD7yjn7qPmmUF"
+        data-key="pk_test_AaMvBsxneq9gkfu6UjzkvInK"
         data-amount="{{ page.payment_amount }}"
-        data-name="SynchoNL"
+        data-name="SynchroNL"
         data-description="{{ page.payment_description }}"
         data-image="http://www.synchronl.com/static/images/g4167.png"
         data-locale="auto"

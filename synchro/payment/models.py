@@ -29,7 +29,7 @@ class PaymentPage(AbstractEmailForm):
                                      )
     payment_description = models.TextField(verbose_name="Payment Description",
                                            blank=False,
-                                           default="Synchro Online Payment",
+                                           default="Synchronized Swimming Payment",
                                            help_text='The payment description that will show up for the bill.'
                                           )
 
