@@ -68,11 +68,7 @@
           background-color: transparent
         }
       {% else %}
-        .jumbotron {
-      		background: url({% static "images/image10.png" %}) no-repeat center center;
-      		background-size: cover;
-      		background-repeat:repeat;
-      	}
+
       {% endif %}
   	</style
   </head>
@@ -92,7 +88,7 @@
               {% if site_root.title == "Summit Synchro" %}
                 {% static 'images/summitsynchro.png' %}"
               {% else %}
-                {% static 'images/g4167.png' %}"
+                {% static 'images/CAS_NL_Logo_Colour_RGB.png' %}"
               {% endif %}
              class="logo" alt="Home"></img>
           </a>
@@ -100,7 +96,7 @@
           <div class="pull-right">
             <form role="search" class="pull-left search" action="{% url 'search' %}" method="get">
               <div class="input-group">
-                <input type="text" name="query" class="form-control" placeholder="Search?!" value="{{ search_query }}" />
+                <input type="text" name="query" class="form-control" placeholder="Search" value="{{ search_query }}" />
                 <div class="input-group-btn">
                     <button type="submit" class="btn btn-default">
                         <i class="glyphicon glyphicon-search"></i>

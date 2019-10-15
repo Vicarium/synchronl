@@ -1,4 +1,10 @@
 
+.jumbotron {
+	background: url({% static "images/image10.png" %}) no-repeat center center;
+	background-size: cover;
+	background-repeat:repeat;
+}
+
 .page-header{
 	max-width: 970px;
 	padding-bottom:9px;
