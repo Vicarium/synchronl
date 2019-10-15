@@ -18,11 +18,15 @@ from common.models import CarouselItem, RelatedLink
 
 
 class HomePageCarouselItem(Orderable, CarouselItem):
-    page = ParentalKey("home.HomePage", related_name="carousel_items")
+    page = ParentalKey(
+        "home.HomePage", on_delete=models.CASCADE, related_name="carousel_items"
+    )
 
 
 class HomePageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey("home.HomePage", related_name="related_links")
+    page = ParentalKey(
+        "home.HomePage", on_delete=models.CASCADE, related_name="related_links"
+    )
 
 
 class HomePage(Page):

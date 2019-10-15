@@ -17,42 +17,38 @@ from taggit.models import TaggedItemBase
 class SimpleImage(models.Model):
     name = models.CharField(max_length=255)
     image = models.ForeignKey(
-        'wagtailimages.Image',
+        "wagtailimages.Image",
         null=True,
         blank=False,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name="+",
     )
 
-    panels = [
-        FieldPanel('name'),
-        ImageChooserPanel('image')
-    ]
+    panels = [FieldPanel("name"), ImageChooserPanel("image")]
 
     class Meta:
         abstract = True
 
 
 class GalleryPageTag(TaggedItemBase):
-    content_object = ParentalKey('GalleryPage', related_name='tagged_items')
+    content_object = ParentalKey(
+        "GalleryPage", on_delete=models.CASCADE, related_name="tagged_items"
+    )
 
 
 # Basic Gallery page with optional thumbnail
 class GalleryPage(Page):
     body = RichTextField(blank=True)
     feed_image = models.ForeignKey(
-        'wagtailimages.Image',
+        "wagtailimages.Image",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name="+",
     )
     image_tags = ClusterTaggableManager(through=GalleryPageTag, blank=True)
 
-    search_fields = Page.search_fields + [
-        index.SearchField('body'),
-    ]
-
+    search_fields = Page.search_fields + [index.SearchField("body")]
 
     def get_images(self):
         """ Get images with tag or manually added to gallery and return them sorted by creation date """
@@ -68,20 +64,18 @@ class GalleryPage(Page):
 
         union_set = tag_set.union(manual_set)
 
-        return union_set.order_by('-created_at')
+        return union_set.order_by("-created_at")
 
 
 GalleryPage.content_panels = [
-    FieldPanel('title', classname="full title"),
-    FieldPanel('body', classname="full"),
-    FieldPanel('image_tags', classname="full"),
-    InlinePanel('simpleimage', label="Images")
+    FieldPanel("title", classname="full title"),
+    FieldPanel("body", classname="full"),
+    FieldPanel("image_tags", classname="full"),
+    InlinePanel("simpleimage", label="Images"),
 ]
 
-GalleryPage.promote_panels = Page.promote_panels + [
-    ImageChooserPanel('feed_image'),
-]
+GalleryPage.promote_panels = Page.promote_panels + [ImageChooserPanel("feed_image")]
 
 
 class GalleryPageSimpleImage(Orderable, SimpleImage):
-    page = ParentalKey('gallery.GalleryPage', related_name='simpleimage')
+    page = ParentalKey("gallery.GalleryPage", related_name="simpleimage")

@@ -14,18 +14,18 @@ class Sponsor(models.Model):
     text = models.TextField(blank=True, null=True)
     link = models.URLField("External link", blank=True)
     image = models.ForeignKey(
-        'wagtailimages.Image',
+        "wagtailimages.Image",
         null=True,
         blank=False,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name="+",
     )
 
     panels = [
-        FieldPanel('name', classname="full"),
-        FieldPanel('text', classname="full"),
-        FieldPanel('link', classname="full"),
-        ImageChooserPanel('image')
+        FieldPanel("name", classname="full"),
+        FieldPanel("text", classname="full"),
+        FieldPanel("link", classname="full"),
+        ImageChooserPanel("image"),
     ]
 
     class Meta:
@@ -36,12 +36,15 @@ class Sponsor(models.Model):
 class SponsorPage(Page):
     intro = models.TextField(blank=True)
 
+
 SponsorPage.content_panels = [
-    FieldPanel('title', classname="full title"),
-    FieldPanel('intro', classname="full"),
-    InlinePanel('sponsor', label="Sponsors"),
+    FieldPanel("title", classname="full title"),
+    FieldPanel("intro", classname="full"),
+    InlinePanel("sponsor", label="Sponsors"),
 ]
 
 
 class SponsorPageSponsor(Orderable, Sponsor):
-    page = ParentalKey('sponsor.SponsorPage', related_name='sponsor')
+    page = ParentalKey(
+        "sponsor.SponsorPage", on_delete=models.CASCADE, related_name="sponsor"
+    )

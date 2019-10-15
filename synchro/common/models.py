@@ -96,7 +96,9 @@ class CarouselItem(LinkFields):
 
 
 class AdvertPlacement(models.Model):
-    page = ParentalKey("wagtailcore.Page", related_name="advert_placements")
+    page = ParentalKey(
+        "wagtailcore.Page", on_delete=models.CASCADE, related_name="advert_placements"
+    )
     advert = models.ForeignKey(
         "common.Advert", on_delete=models.CASCADE, related_name="+"
     )
@@ -126,7 +128,11 @@ register_snippet(Advert)
 
 
 class StandardIndexPageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey("common.StandardIndexPage", related_name="related_links")
+    page = ParentalKey(
+        "common.StandardIndexPage",
+        on_delete=models.CASCADE,
+        related_name="related_links",
+    )
 
 
 class StandardIndexPage(Page):
@@ -157,11 +163,15 @@ StandardIndexPage.promote_panels = Page.promote_panels + [
 
 
 class StandardPageCarouselItem(Orderable, CarouselItem):
-    page = ParentalKey("common.StandardPage", related_name="carousel_items")
+    page = ParentalKey(
+        "common.StandardPage", on_delete=models.CASCADE, related_name="carousel_items"
+    )
 
 
 class StandardPageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey("common.StandardPage", related_name="related_links")
+    page = ParentalKey(
+        "common.StandardPage", on_delete=models.CASCADE, related_name="related_links"
+    )
 
 
 class StandardPage(Page):

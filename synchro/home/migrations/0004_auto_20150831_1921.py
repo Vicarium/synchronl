@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# fmt: off
 from __future__ import unicode_literals
 
 from django.db import models, migrations
@@ -63,3 +64,4 @@ class Migration(migrations.Migration):
             field=modelcluster.fields.ParentalKey(related_name='carousel_items', to='home.HomePage'),
         ),
     ]
+# fmt: on
