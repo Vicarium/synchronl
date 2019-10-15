@@ -10,7 +10,7 @@ black = "*"
 [packages]
 django-compressor = "*"
 stripe = "~=2.37"
-wagtail = "==2.2"
+wagtail = "==2.3"
 Django = "==1.11.17"
 
 [requires]
