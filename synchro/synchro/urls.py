@@ -2,9 +2,9 @@ from django.conf.urls import include, url
 from django.conf import settings
 from django.contrib import admin
 
-from wagtail.wagtailadmin import urls as wagtailadmin_urls
-from wagtail.wagtaildocs import urls as wagtaildocs_urls
-from wagtail.wagtailcore import urls as wagtail_urls
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.documents import urls as wagtaildocs_urls
+from wagtail.core import urls as wagtail_urls
 
 from payment import urls as payment_urls
 
@@ -12,19 +12,15 @@ from search.views import search
 
 
 urlpatterns = [
-    url(r'^django-admin/', include(admin.site.urls)),
-
-    url(r'^admin/', include(wagtailadmin_urls)),
-    url(r'^documents/', include(wagtaildocs_urls)),
-
-    url(r'^search/$', search, name='search'),
-
+    url(r"^django-admin/", include(admin.site.urls)),
+    url(r"^admin/", include(wagtailadmin_urls)),
+    url(r"^documents/", include(wagtaildocs_urls)),
+    url(r"^search/$", search, name="search"),
     # payment url for stripe checkout
-    url(r'^payment/', include(payment_urls), name="payment"),
-
+    url(r"^payment/", include(payment_urls), name="payment"),
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's serving mechanism
-    url(r'', include(wagtail_urls)),
+    url(r"", include(wagtail_urls)),
 ]
 
 

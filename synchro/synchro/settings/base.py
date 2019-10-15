@@ -20,10 +20,12 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-ALLOWED_HOSTS = ['summitsynchro.synchronl.com',
-                 'synchronl.com',
-                 'www.synchronl.com',
-                 '127.0.0.1']
+ALLOWED_HOSTS = [
+    "summitsynchro.synchronl.com",
+    "synchronl.com",
+    "www.synchronl.com",
+    "127.0.0.1",
+]
 
 
 DEBUG = False
@@ -31,104 +33,93 @@ DEBUG = False
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
     # Wagtail requirements
-    'taggit',
-    'compressor',
-    'modelcluster',
-    'overextends',
-
+    "taggit",
+    "compressor",
+    "modelcluster",
     # Wagtail admin override
-    'dashboard',
-
+    "dashboard",
     # Wagtail itself
-    'wagtail.wagtailcore',
-    'wagtail.wagtailadmin',
-    'wagtail.wagtailsearch',
-    'wagtail.wagtailimages',
-    'wagtail.wagtaildocs',
-    'wagtail.wagtailsnippets',
-    'wagtail.wagtailusers',
-    'wagtail.wagtailsites',
-    'wagtail.wagtailembeds',
-    'wagtail.wagtailredirects',
-    'wagtail.wagtailforms',
-
-    'wagtail.contrib.wagtailsearchpromotions',
-
+    "wagtail.core",
+    "wagtail.admin",
+    "wagtail.search",
+    "wagtail.images",
+    "wagtail.documents",
+    "wagtail.snippets",
+    "wagtail.users",
+    "wagtail.sites",
+    "wagtail.embeds",
+    "wagtail.contrib.redirects",
+    "wagtail.contrib.forms",
+    "wagtail.contrib.search_promotions",
     # Other 3rd party apps
-#    'twitter_tag',
-
+    #    'twitter_tag',
     # Default wagtail apps
-    'search',
-    'home',
-
-# In-house apps
-    'common',
-    'blog',
-    'person',
-    'about',
-    'sponsor',
-    'gallery',
-    'gdrive',
-    'event',
-    'document',
-    'team',
-    'form',
-    'payment',
+    "search",
+    "home",
+    # In-house apps
+    "common",
+    "blog",
+    "person",
+    "about",
+    "sponsor",
+    "gallery",
+    "gdrive",
+    "event",
+    "document",
+    "team",
+    "form",
+    "payment",
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-
-    'wagtail.wagtailcore.middleware.SiteMiddleware',
-    'wagtail.wagtailredirects.middleware.RedirectMiddleware',
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.auth.middleware.SessionAuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "wagtail.core.middleware.SiteMiddleware",
+    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 )
 
-ROOT_URLCONF = 'synchro.urls'
+ROOT_URLCONF = "synchro.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(PROJECT_DIR, 'templates'),
-        ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'builtins': ['overextends.templatetags.overextends_tags'],
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(PROJECT_DIR, "templates")],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "builtins": [],
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
-    },
+    }
 ]
 
-WSGI_APPLICATION = 'synchro.wsgi.application'
+WSGI_APPLICATION = "synchro.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 
@@ -136,9 +127,9 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -151,20 +142,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "compressor.finders.CompressorFinder",
 )
 
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_DIR, 'static'),
-)
+STATICFILES_DIRS = (os.path.join(PROJECT_DIR, "static"),)
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_URL = "/static/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
 
 
 # Wagtail settings
@@ -177,10 +166,10 @@ TAGGIT_CASE_INSENSITIVE = True
 
 # Twitter settings
 # Your access token: Access token
-TWITTER_OAUTH_TOKEN = ''
+TWITTER_OAUTH_TOKEN = ""
 # Your access token: Access token secret
-TWITTER_OAUTH_SECRET = ''
+TWITTER_OAUTH_SECRET = ""
 # OAuth settings: Consumer key
-TWITTER_CONSUMER_KEY = ''
+TWITTER_CONSUMER_KEY = ""
 # OAuth settings: Consumer secret
-TWITTER_CONSUMER_SECRET = ''
+TWITTER_CONSUMER_SECRET = ""

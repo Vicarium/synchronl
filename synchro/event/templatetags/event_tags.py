@@ -3,7 +3,7 @@ from django import template
 from django.conf import settings
 
 from event.models import EventPage
-from wagtail.wagtailcore.models import Page
+from wagtail.core.models import Page
 
 register = template.Library()
 

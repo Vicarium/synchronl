@@ -54,3 +54,6 @@ media/
 
 # Server Files
 *.sock
+
+# VSCode
+.vscode/

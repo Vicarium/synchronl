@@ -1,9 +1,9 @@
 from django.db import models
 
-from wagtail.wagtailcore.models import Orderable, Page
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailimages.models import Image
+from wagtail.core.models import Orderable, Page
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.images.models import Image
 
 from modelcluster.fields import ParentalKey
 

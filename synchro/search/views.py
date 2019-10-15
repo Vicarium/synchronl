@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailsearch.models import Query
-from wagtail.contrib.wagtailsearchpromotions.models import SearchPromotion as EditorsPick
+from wagtail.core.models import Page
+from wagtail.search.models import Query
+from wagtail.contrib.search_promotions.models import SearchPromotion as EditorsPick
 
 
 def search(request):
