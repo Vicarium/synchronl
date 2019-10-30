@@ -1,0 +1,7 @@
+{% load common_tags wagtailcore_tags %}
+
+<div class="dropdown-menu">
+  {% for child in menuitems_children %}
+    <li class="listgroup-item"><a class="dropdown-item" href="{% pageurl child %}">{{ child.title }}</a></li>
+  {% endfor %}
+</div>

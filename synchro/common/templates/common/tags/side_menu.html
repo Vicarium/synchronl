@@ -1,0 +1,31 @@
+{% load common_tags static wagtailcore_tags %}
+{% get_site_root as site_root %}
+
+<div class="list-group list-group-flush h5">
+    <a href="/" class="list-group-item p-0">
+        <img src="
+        {% if site_root.title == "Summit Synchro" %}
+            {% static 'images/summitsynchro.png' %}"
+        {% else %}
+            {% static 'images/CAS_NL_Logo_Colour_RGB.png' %}"
+        {% endif %}
+        class="img-fluid" alt="Home" id="sidebar-logo"></img>
+    </a>
+    {% for menuitem in menuitems %}
+    <div class="dropright btn-group">
+        <a href="{% pageurl menuitem %}" class="list-group-item list-group-item-action bg-light">
+            {{ menuitem.title }}
+        </a>     
+        
+        {% if menuitem.show_dropdown %}
+        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropright</span>
+        </button>
+        {% top_menu_children parent=menuitem %}
+        {% endif %}
+    </div>
+
+    {% endfor %}
+
+
+</div>
