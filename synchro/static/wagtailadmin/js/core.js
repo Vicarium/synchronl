@@ -59,7 +59,7 @@ function enableDirtyFormCheck(formSelector, options) {
     var initialData = $form.serialize();
     var formSubmitted = false;
 
-    $form.submit(function() {
+    $form.on('submit', function() {
         formSubmitted = true;
     });
 
@@ -106,9 +106,58 @@ $(function() {
 
     fitNav();
 
-    $(window).resize(function() {
+    $(window).on('resize', function() {
         fitNav();
     });
+
+    // Logo interactivity
+    function initLogo() {
+        var sensitivity = 8; // the amount of times the user must stroke the wagtail to trigger the animation
+
+        var $logoContainer = $('.wagtail-logo-container__desktop');
+        var mouseX = 0;
+        var lastMouseX = 0;
+        var dir = '';
+        var lastDir = '';
+        var dirChangeCount = 0;
+
+        function enableWag() {
+            $logoContainer.removeClass('logo-serious').addClass('logo-playful');
+        }
+
+        function disableWag() {
+            $logoContainer.removeClass('logo-playful').addClass('logo-serious');
+        }
+
+        $logoContainer.on('mousemove', function(event) {
+            mouseX = event.pageX;
+
+            if (mouseX > lastMouseX) {
+                dir = 'r';
+            } else if (mouseX < lastMouseX) {
+                dir = 'l';
+            }
+
+            if (dir != lastDir && lastDir != '') {
+                dirChangeCount += 1;
+            }
+
+            if (dirChangeCount > sensitivity) {
+                enableWag();
+            }
+
+            lastMouseX = mouseX;
+            lastDir = dir;
+        });
+
+        $logoContainer.on('mouseleave', function() {
+            dirChangeCount = 0;
+            disableWag();
+        });
+
+        disableWag();
+    }
+    initLogo();
 
     // Enable nice focus effects on all fields. This enables help text on hover.
     $(document).on('focus mouseover', 'input,textarea,select', function() {
@@ -124,14 +173,19 @@ $(function() {
     });
 
     /* tabs */
+    if (window.location.hash) {
+      $('a[href="' + window.location.hash + '"]').tab('show');
+    }
+
     $(document).on('click', '.tab-nav a', function(e) {
-        e.preventDefault();
-        $(this).tab('show');
+      e.preventDefault();
+      $(this).tab('show');
+      window.history.replaceState(null, null, $(this).attr('href'));
     });
 
     $(document).on('click', '.tab-toggle', function(e) {
         e.preventDefault();
-        $('.tab-nav a[href="' + $(this).attr('href') + '"]').click();
+        $('.tab-nav a[href="' + $(this).attr('href') + '"]').trigger('click');
     });
 
     $('.dropdown').each(function() {
@@ -169,38 +223,53 @@ $(function() {
     if (window.headerSearch) {
         var searchCurrentIndex = 0;
         var searchNextIndex = 0;
+        var $input = $(window.headerSearch.termInput);
+        var $inputContainer = $input.parent();
 
-        $(window.headerSearch.termInput).on('keyup cut paste', function() {
-            clearTimeout($.data(this, 'timer'));
-            var wait = setTimeout(search, 200);
-            $(this).data('timer', wait);
+        $input.on('keyup cut paste change', function() {
+            clearTimeout($input.data('timer'));
+            $input.data('timer', setTimeout(search, 200));
         });
 
         // auto focus on search box
-        $(window.headerSearch.termInput).trigger('focus');
+        $input.trigger('focus');
 
         function search() {
             var workingClasses = 'icon-spinner';
 
-            $(window.headerSearch.termInput).parent().addClass(workingClasses);
-            searchNextIndex++;
-            var index = searchNextIndex;
-            $.ajax({
-                url: window.headerSearch.url,
-                data: {q: $(window.headerSearch.termInput).val()},
-                success: function(data, status) {
-                    if (index > searchCurrentIndex) {
-                        searchCurrentIndex = index;
-                        $(window.headerSearch.targetOutput).html(data).slideDown(800);
-                        window.history.pushState(null, 'Search results', '?q=' + $(window.headerSearch.termInput).val());
+            var newQuery = $input.val();
+            var currentQuery = getURLParam('q');
+            // only do the query if it has changed for trimmed queries
+            // eg. " " === "" and "firstword " ==== "firstword"
+            if (currentQuery.trim() !== newQuery.trim()) {
+                $inputContainer.addClass(workingClasses);
+                searchNextIndex++;
+                var index = searchNextIndex;
+                $.ajax({
+                    url: window.headerSearch.url,
+                    data: {q: newQuery},
+                    success: function(data, status) {
+                        if (index > searchCurrentIndex) {
+                            searchCurrentIndex = index;
+                            $(window.headerSearch.targetOutput).html(data).slideDown(800);
+                            window.history.replaceState(null, null, '?q=' + newQuery);
+                        }
+                    },
+                    complete: function() {
+                        $inputContainer.removeClass(workingClasses);
                     }
-                },
-
-                complete: function() {
-                    $(window.headerSearch.termInput).parent().removeClass(workingClasses);
-                }
-            });
+                });
+            }
         }
+
+        function getURLParam(name) {
+            var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.search);
+            if (results) {
+                return results[1];
+            }
+            return '';
+        }
+
     }
 
     /* Functions that need to run/rerun when active tabs are changed */

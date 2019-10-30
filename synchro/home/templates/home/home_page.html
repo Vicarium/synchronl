@@ -3,63 +3,62 @@
 {% load wagtailimages_tags static %}
 
 {% block heading %}
-  <div class="jumbotron">
-      {% include "common/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
-  </div>
+  {% include "common/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
+  
 {% endblock %}
 
 {% block content %}
+<div class="container-fluid">
 {# Facebook Embed code #}
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
 
-  	  {% blog_feature %}
-  <div class="row">
-    <div class="col-md-8 information-block">
-      {% image self.small_image original as sm_img %}
-      <img src="{{sm_img.url}}" class="center-block img-responsive" style="max-height:200px">
-      <br>
-      <br>
+{% blog_feature %}
+
+
+  <div class="row information-block align-items-center breakout">
+    <div class="col-md-6 text-center">
+
+      <h1 class="display-3">About Us</h1>
+
       {% include "common/includes/body.html" with body=self.body only %}
     </div>
-    <div class="col-sm-4 pull-right">
-      {% blog_listing %}
+    <div class="col-sm-6 pr-0">
+        {% image self.small_image original as sm_img %}
+        <img src="{{sm_img.url}}" class="img-fluid">
 	  </div>
   </div>
+  
+  {% blog_listing %}
 
-  <br>
-
-  <row>
-
-    {% event_listing %}
-
-    {% if self.twitter_widget %}
-    	<div class="col-sm-4">
-        <div class="panel panel-default">
-          <div class="panel-heading"><h3 class="panel-title">Tweets</h3></div>
-          <div class="list-group" style="color:#ffffff">
-            {{ self.twitter_widget | safe }}
-          </div>
-    	  </div>
-      </div>
-    {% endif %}
-
-    <div class="col-sm-4">
-      <div class="panel panel-default">
-        <div class="panel-heading"><h3 class="panel-title">Facebook Feed</h3></div>
-        <div class="list-group" style="color:#ffffff">
-          {{ self.facebook_widget | safe }}
+  {% event_listing %}
+  
+  <div class="row social-block pb-3">
+    <div class="container">
+      <h1 class="display-3">Follow On Social Media</h1>    
+    
+      <div class="card-deck">
+        <div class="card"> 
+              {{ self.twitter_widget | safe }}
         </div>
-  	  </div>
+        <div class="card"> 
+            
+              {{ self.facebook_widget | safe }}
+            
+          </div>
+      </div>
     </div>
-  </row>
+  </div>
 
+</div>
 
 {% endblock %}
 

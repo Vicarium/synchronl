@@ -1,10 +1,33 @@
+{% load wagtailimages_tags %}
+
 {% if blogs %}
-  <div class="panel panel-default">
-    <div class="panel-heading"><h3 class="panel-title">Recent News</h3></div>
-    <div class="list-group">
-      {% for blog in blogs %}
-        {% include "blog/includes/blog_list_item.html" %}
-      {% endfor %}
+  <div class="row news-block pb-3">
+    <div class="container">
+      <h1 class="display-3">Recent News</h1>    
+    
+      <div class="card-deck">
+
+        {% for blog in blogs %}
+        <div class="card news-card text-center">
+
+          {% if blog.feed_image %}
+            {% image blog.feed_image width-100 as img %}
+            <img src="{{ img.url }}" class="card-img-top">
+          {% endif %}            
+            
+          <div class="card-body">
+            <h3 class="card-title">{{ blog.title }}</h3>
+            <p class="card-text"><small class="text-muted">{{ blog.date }}</small></p>
+            {% if blog.search_description %}
+              <p class="card-text">{{ blog.search_description }}</p>
+            {% endif %}
+          </div>
+          <div class="card-footer align-bottom">
+            <a href="{{ blog.url }}" class="btn btn-primary btn-block align-bottom" id="read-btn">Read More <i class="fas fa-external-link-square-alt"></i></a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 {% endif %}

@@ -8,10 +8,14 @@ function ModalWorkflow(opts) {
         'url' (required): initial
         'responses' (optional): dict of callbacks to be called when the modal content
             calls modal.respond(callbackName, params)
+        'onload' (optional): dict of callbacks to be called when loading a step of the workflow.
+            The 'step' field in the response identifies the callback to call, passing it the
+            modal object and response data as arguments
     */
 
     var self = {};
     var responseCallbacks = opts.responses || {};
+    var errorCallback = opts.onError || function () {};
 
     /* remove any previous modals before continuing (closing doesn't remove them from the dom) */
     $('body > .modal').remove();
@@ -26,23 +30,23 @@ function ModalWorkflow(opts) {
     self.body = container.find('.modal-body');
 
     self.loadUrl = function(url, urlParams) {
-        $.get(url, urlParams, self.loadResponseText, 'text');
+        $.get(url, urlParams, self.loadResponseText, 'text').fail(errorCallback);
     };
 
     self.postForm = function(url, formData) {
-        $.post(url, formData, self.loadResponseText, 'text');
+        $.post(url, formData, self.loadResponseText, 'text').fail(errorCallback);
     };
 
     self.ajaxifyForm = function(formSelector) {
         $(formSelector).each(function() {
             var action = this.action;
             if (this.method.toLowerCase() == 'get') {
-                $(this).submit(function() {
+                $(this).on('submit', function() {
                     self.loadUrl(action, $(this).serialize());
                     return false;
                 });
             } else {
-                $(this).submit(function() {
+                $(this).on('submit', function() {
                     self.postForm(action, $(this).serialize());
                     return false;
                 });
@@ -50,22 +54,36 @@ function ModalWorkflow(opts) {
         });
     };
 
-    self.loadResponseText = function(responseText) {
-        var response = eval('(' + responseText + ')');
+    self.loadResponseText = function(responseText, textStatus, xhr) {
+        /* RemovedInWagtail24Warning - support for eval()-ing text/javascript responses
+        (rather than JSON.parse) will be dropped */
+        var response;
+        if (xhr && xhr.getResponseHeader('content-type') != 'text/javascript') {
+            response = JSON.parse(responseText);
+        } else {
+            response = eval('(' + responseText + ')');
+        }
 
         self.loadBody(response);
     };
 
     self.loadBody = function(response) {
         if (response.html) {
-            // if the response is html
+            // if response contains an 'html' item, replace modal body with it
             self.body.html(response.html);
             container.modal('show');
         }
 
         if (response.onload) {
-            // if the response is a function
-            response.onload(self);
+            // if response contains an 'onload' function, call it
+            // (passing this modal object and the full response data)
+            response.onload(self, response);
+        }
+
+        /* If response contains a 'step' identifier, and that identifier is found in
+        the onload dict, call that onload handler */
+        if (opts.onload && response.step && (response.step in opts.onload)) {
+            opts.onload[response.step](self, response);
         }
     };
 

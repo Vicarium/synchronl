@@ -1,19 +1,10 @@
 'use strict';
 
-// registerHalloPlugin must be implemented here so it can be used by plugins
-// hooked in with insert_editor_js (and hallo-bootstrap.js runs too late)
-var halloPlugins = {
-    halloformat: {},
-    halloheadings: {formatBlocks: ['p', 'h2', 'h3', 'h4', 'h5']},
-    hallolists: {},
-    hallohr: {},
-    halloreundo: {},
-    hallowagtaillink: {},
-    hallorequireparagraphs: {}
-};
-
+var halloPlugins = {};
 function registerHalloPlugin(name, opts) {
-    halloPlugins[name] = (opts || {});
+    /* Obsolete - used on Wagtail <1.12 to register plugins for the hallo.js editor.
+    Defined here so that third-party plugins can continue to call it to provide Wagtail <1.12
+    compatibility, without throwing an error on later versions. */
 }
 
 // Compare two date objects. Ignore minutes and seconds.
@@ -41,10 +32,6 @@ function initDateChooser(id, opts) {
             timepicker: false,
             scrollInput: false,
             format: 'Y-m-d',
-            i18n: {
-                lang: window.dateTimePickerTranslations
-            },
-            lang: 'lang',
             onGenerate: hideCurrent
         }, opts || {}));
     } else {
@@ -64,10 +51,6 @@ function initTimeChooser(id) {
             datepicker: false,
             scrollInput: false,
             format: 'H:i',
-            i18n: {
-                lang: window.dateTimePickerTranslations
-            },
-            lang: 'lang'
         });
     } else {
         $('#' + id).datetimepicker({
@@ -83,10 +66,6 @@ function initDateTimeChooser(id, opts) {
             closeOnDateSelect: true,
             format: 'Y-m-d H:i',
             scrollInput: false,
-            i18n: {
-                lang: window.dateTimePickerTranslations
-            },
-            language: 'lang',
             onGenerate: hideCurrent
         }, opts || {}));
     } else {
@@ -115,7 +94,7 @@ function InlinePanel(opts) {
         //mark container as having children to identify fields in use from those not
         self.setHasContent();
 
-        $('#' + deleteInputId + '-button').click(function() {
+        $('#' + deleteInputId + '-button').on('click', function() {
             /* set 'deleted' form field to true */
             $('#' + deleteInputId).val('1');
             $('#' + childId).addClass('deleted').slideUp(function() {
@@ -126,7 +105,7 @@ function InlinePanel(opts) {
         });
 
         if (opts.canOrder) {
-            $('#' + prefix + '-move-up').click(function() {
+            $('#' + prefix + '-move-up').on('click', function() {
                 var currentChild = $('#' + childId);
                 var currentChildOrderElem = currentChild.find('input[name$="-ORDER"]');
                 var currentChildOrder = currentChildOrderElem.val();
@@ -147,7 +126,7 @@ function InlinePanel(opts) {
                 self.updateMoveButtonDisabledStates();
             });
 
-            $('#' + prefix + '-move-down').click(function() {
+            $('#' + prefix + '-move-down').on('click', function() {
                 var currentChild = $('#' + childId);
                 var currentChildOrderElem = currentChild.find('input[name$="-ORDER"]');
                 var currentChildOrder = currentChildOrderElem.val();
@@ -187,7 +166,7 @@ function InlinePanel(opts) {
 
     self.updateMoveButtonDisabledStates = function() {
         if (opts.canOrder) {
-            var forms = self.formsUl.children('li:visible');
+            var forms = self.formsUl.children('li:not(.deleted)');
             forms.each(function(i) {
                 $('ul.controls .inline-child-move-up', this).toggleClass('disabled', i === 0).toggleClass('enabled', i !== 0);
                 $('ul.controls .inline-child-move-down', this).toggleClass('disabled', i === forms.length - 1).toggleClass('enabled', i != forms.length - 1);
@@ -197,7 +176,7 @@ function InlinePanel(opts) {
 
     self.updateAddButtonState = function() {
         if (opts.maxForms) {
-            var forms = self.formsUl.children('li:visible');
+            var forms = $('> li', self.formsUl).not('.deleted');
             var addButton = $('#' + opts.formsetPrefix + '-ADD');
 
             if (forms.length >= opts.maxForms) {
@@ -210,7 +189,7 @@ function InlinePanel(opts) {
 
     self.animateSwap = function(item1, item2) {
         var parent = self.formsUl;
-        var children = parent.children('li:visible');
+        var children = parent.children('li:not(.deleted)');
 
         // Apply moving class to container (ul.multiple) so it can assist absolute positioning of it's children
         // Also set it's relatively calculated height to be an absolute one, to prevent the container collapsing while its children go absolute
@@ -292,7 +271,7 @@ function initSlugAutoPopulate() {
 }
 
 function initSlugCleaning() {
-    $('#id_slug').blur(function() {
+    $('#id_slug').on('blur', function() {
         // if a user has just set the slug themselves, don't remove stop words etc, just illegal characters
         $(this).val(cleanForSlug($(this).val(), false));
     });
@@ -326,7 +305,7 @@ function initCollapsibleBlocks() {
             $fieldset.hide();
         }
 
-        $li.find('> h2').click(function() {
+        $li.find('> h2').on('click', function() {
             if (!$li.hasClass('collapsed')) {
                 $li.addClass('collapsed');
                 $fieldset.hide('slow');
@@ -395,11 +374,11 @@ $(function() {
             $form.on('change keyup DOMSubtreeModified', function () {
                 clearTimeout(autoUpdatePreviewDataTimeout);
                 autoUpdatePreviewDataTimeout = setTimeout(setPreviewData, 1000);
-            }).change();
+            }).trigger('change');
         }
     });
 
-    $previewButton.click(function(e) {
+    $previewButton.on('click', function(e) {
         e.preventDefault();
         var $this = $(this);
         var $icon = $this.filter('.icon'),
@@ -415,7 +394,7 @@ $(function() {
                 window.focus();
                 previewWindow.close();
                 // TODO: Stop sending the form, as it removes file data.
-                $form.submit();
+                $form.trigger('submit');
             }
         }).fail(function () {
             alert('Error while sending preview data.');

@@ -1,18 +1,33 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags static %}
 {% if blogs %}
-  <div class="well container-fluid feature">
-      {% for blog in blogs %}
-        <div class="row">
-          <div class="col-md-7">
-            <h3>{{ blog.title }}</h3>
-            {% if blog.search_description %}
-              <p>{{ blog.search_description }}</p>
-            {% endif %}
-          </div>
-          <div class="col-md-2 pull-right">
-            <h3><a href="{% pageurl blog %}" class="btn btn-lg btn-primary pull-right"> Read More </a></h3>
-          </div>
+  
+{% for blog in blogs %}     
+
+<div class="card border-0 rounded-0 breakout" id="blog-feature">
+  <div class="row no-gutters align-items-center justify-content-md-center">
+    <div class="col-md-3">
+      <img 
+      src="{% if site_root.title == "Summit Synchro" %}
+      {% static 'images/summitsynchro.png' %}"
+      {% else %}
+      {% static 'images/CAS_NL_Icon_Colour_Rev_RGB.png' %}"
+      {% endif %}" class="card-img" alt="...">
+    </div>
+      <div class="col-md-7">
+      
+      <div class="card-body text-center text-white">
+        <h1 class="display-4">{{ blog.title }}</h1>
+        {% if blog.search_description %}
+        <p class="card-text">{{ blog.search_description }}</p>
+        {% endif %}
+        <p class="card-text"><small class="">{{blog.date}}</small></p>
+        <div class=>
+            <h3><a href="{% pageurl blog %}" class="btn btn-lg btn-primary" id="read-btn"> Read More </a></h3>
         </div>
-      {% endfor %}
+      </div>
+    </div>
   </div>
+</div>
+{% endfor %}
+
 {% endif %}
