@@ -1,0 +1,157 @@
+
+/* Card */
+.card-deck .card {
+	max-width: fit-content;
+}
+
+.card-deck .news-card {
+	background-color: var(--nlarts-deep-blue);
+}
+
+.news-card .card-body, .news-card .card-header {
+	color: white !important;
+}
+
+
+.card-image {
+	max-width: 100% important;
+	max-height: 320px
+}
+
+
+/* Sidebar */
+body {
+  overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+  height: 100vh;
+}
+
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+ul.dropdown-menu {
+	font-size: inherit!important;
+	padding: 0rem!important;
+}
+
+ul.dropdown-menu li a {
+	text-decoration: none;
+}
+
+ul.dropdown-menu li {
+width: 100%;
+color: #495057;
+text-align: inherit;
+}
+
+ul.dropdown-menu li:hover, .ul.dropdown-menu li:focus {
+z-index: 1;
+color: #495057;
+
+background-color: #f8f9fa;
+}
+
+.list-group-item-action:active {
+color: #212529;
+background-color: #e9ecef;
+}
+
+ul.dropdown-menu li {
+position: relative;
+display: block;
+padding: 0.75rem 1.25rem;
+margin-bottom: -1px;
+background-color: var(--nlarts-aqua-blue);
+border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+ul.dropdown-menu li:first-child {
+border-top-left-radius: 0.25rem;
+border-top-right-radius: 0.25rem;
+}
+
+ul.dropdown-menu li:last-child {
+margin-bottom: 0;
+border-bottom-right-radius: 0.25rem;
+border-bottom-left-radius: 0.25rem;
+}
+
+ul.dropdown-menu li {
+	border-right: 0;
+	border-left: 0;
+	border-radius: 0;
+}
+
+ul.dropdown-menu li:last-child {
+margin-bottom: -1px;
+}
+
+ul.dropdown-menu li:first-child {
+border-top: 0;
+}
+
+ul.dropdown-menu li:last-child {
+margin-bottom: 0;
+border-bottom: 0;
+}
+
+/* Social Media Buttons */
+a {text-decoration: none;}
+a .fab{
+    padding: 10px 15px;
+}
+
+a .fa-facebook-f{ color: #3b5998;}
+    a .fa-facebook-f:hover { background-color: #3b5998;}
+a .fa-linkedin{ color: #4875B4;}
+    a .fa-linkedin:hover { background-color: #4875B4;}
+a .fa-twitter{ color: #55acee;}
+    a .fa-twitter:hover { background-color: #55acee;}
+a .fa-google-plus{ color: #C63D2D;}
+    a .fa-google-plus:hover { background-color: #C63D2D;}
+
+
+a .fab:hover{
+    color: white;
+}
+
+/* Carousel */
+.carousel {
+	min-height: 25rem;
+
+}
+
+.carousel-item {
+	min-height: 25rem;
+}
+
+
+/* Parallax Element Style*/
+.carousel-inner .carousel-item
+{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    -webkit-background-position: center;
+    -moz-background-position: center;
+    -o-background-position: center;
+    background-position: center;
+
+    -webkit-background-attachment: fixed;
+    -moz-background-attachment: fixed;
+    -o-background-attachment: fixed;
+	background-attachment: fixed;
+}
+
+/* Container ignore left and right margins */
+.breakout {
+	margin-left: -15px;
+	margin-right: -15px;
+}
