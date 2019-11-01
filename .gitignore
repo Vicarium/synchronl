@@ -6,6 +6,9 @@ manage_local.py
 *.pyc
 __pycache__
 
+# Django-environ file
+.env
+
 # Logs
 *.log
 pip-log.txt
@@ -23,7 +26,6 @@ nosetests.xml
 .idea
 
 # Vim
-
 *~
 *.swp
 *.swo

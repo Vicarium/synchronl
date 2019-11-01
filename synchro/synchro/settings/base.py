@@ -13,9 +13,22 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+import environ
+
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
+ROOT_DIR = (
+    environ.Path(__file__) - 3
+)  # (synchronl/synchro/synchro/settings/base.py - 3 = synchronl/)
 
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+# reading .env file
+environ.Env.read_env(str(ROOT_DIR.path('.env')))
+
+print(str(ROOT_DIR.path('.env')))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -31,10 +44,19 @@ ALLOWED_HOSTS = [
 ]
 
 
-DEBUG = False
+# False if not in os.environ
+#DEBUG = env('DEBUG')
+DEBUG = True
+
+# Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
+SECRET_KEY = env('SECRET_KEY')
+
+
+SUMMIT_API_KEY = env('STRIPE_SUMMIT')
+SYNCHRONL_API_KEY = env('STRIPE_NLARTS')
+
 
 # Application definition
-
 INSTALLED_APPS = (
     "django.contrib.admin",
     "django.contrib.auth",
@@ -115,6 +137,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "synchro.wsgi.application"
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -176,3 +200,10 @@ TWITTER_OAUTH_SECRET = ""
 TWITTER_CONSUMER_KEY = ""
 # OAuth settings: Consumer secret
 TWITTER_CONSUMER_SECRET = ""
+
+
+# Hacky? TODO
+try:
+    from .local import *
+except ImportError:
+    pass

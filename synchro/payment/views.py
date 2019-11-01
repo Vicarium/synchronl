@@ -1,10 +1,10 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
+from django.conf import settings
 
 import stripe
 import re
-
 
 class StripePaymentView(View):
 
@@ -22,12 +22,8 @@ class StripePaymentView(View):
 
     def post(self, request, payment_amount):
 
-        # Testing Secret Keys, replace with live key in production
-        # SynchroNL
-        synchronl_api_key = "sk_test_wS0FFI9b3H0MRN0MStur2u2Z"
-
-        # Summit
-        summit_api_key = "sk_test_JsmraD2gATrY0tWxqWcQg9MN"
+        synchronl_api_key = settings.SYNCHRONL_API_KEY
+        summit_api_key = settings.SUMMIT_API_KEY
 
         # Set which api key to use
         site_title = request.POST['site_title']
