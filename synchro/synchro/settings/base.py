@@ -24,6 +24,9 @@ ALLOWED_HOSTS = [
     "summitsynchro.synchronl.com",
     "synchronl.com",
     "www.synchronl.com",
+    "nlartisticswimming.com",
+    "*.nlartisticswimming.com",
+    "summitsynchro.nlartisticswimming.com",
     "127.0.0.1",
 ]
 
