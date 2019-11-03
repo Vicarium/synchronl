@@ -15,7 +15,7 @@
     <div class="carousel-inner">
       {% for carousel_item in carousel_items %}
         {# Carousel image #}
-        {% image carousel_item.image width-1000 as carouselimagedata %}
+        {% image carousel_item.image fill-1000x400 as carouselimagedata %}
       
         <div class="carousel-item{% if forloop.first %} active{% endif %}" 
             style="background-image:url({{ carouselimagedata.url }})">

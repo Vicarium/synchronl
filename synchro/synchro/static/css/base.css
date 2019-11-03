@@ -144,10 +144,10 @@ a .fab:hover{
     -o-background-position: center;
     background-position: center;
 
-    -webkit-background-attachment: fixed;
+    /* -webkit-background-attachment: fixed;
     -moz-background-attachment: fixed;
     -o-background-attachment: fixed;
-	background-attachment: fixed;
+	background-attachment: fixed; */
 }
 
 /* Container ignore left and right margins */
