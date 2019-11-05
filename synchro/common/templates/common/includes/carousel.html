@@ -13,20 +13,15 @@
 
 
     <div class="carousel-inner">
-      {% for carousel_item in carousel_items %}
-        {# Carousel image #}
-        {% image carousel_item.image fill-1000x400 as carouselimagedata %}
-      
-        <div class="carousel-item{% if forloop.first %} active{% endif %}" 
-            style="background-image:url({{ carouselimagedata.url }})">
-          
-            {% if carousel_item.embed_url %}
+      {% for carousel_item in carousel_items %}      
+        <div class="carousel-item{% if forloop.first %} active{% endif %}">          
+          {% if carousel_item.embed_url %}
             {# Embedded video - requires an embedly key to be stored in project/settings/local.py #}
             <div class="text-center">
               {% embed url=carousel_item.embed_url max_width=1000 %}
             </div>
-          {% else %}  
-
+          {% else %} 
+            {% image carousel_item.image fill-1000x400 class="d-block w-100" %}
           {% endif %}
           {% if carousel_item.caption or carousel_item.link %}
             <div class="carousel-caption d-none d-md-block">

@@ -121,17 +121,13 @@ a .fab:hover{
 }
 
 /* Carousel */
-.carousel {
-	min-height: 25rem;
 
-}
-
-.carousel-item {
-	min-height: 25rem;
+.carousel-item img {
+	height: auto;
 }
 
 
-/* Parallax Element Style*/
+/* Parallax Element Style
 .carousel-inner .carousel-item
 {
     -webkit-background-size: cover;
@@ -144,11 +140,13 @@ a .fab:hover{
     -o-background-position: center;
     background-position: center;
 
-    /* -webkit-background-attachment: fixed;
+    -webkit-background-attachment: fixed;
     -moz-background-attachment: fixed;
     -o-background-attachment: fixed;
-	background-attachment: fixed; */
-}
+	background-attachment: fixed;
+
+}*/
+
 
 /* Container ignore left and right margins */
     .breakout {
