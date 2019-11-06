@@ -1,3 +1,9 @@
+/* default sizing for iframes */
+iframe {
+	height: 500px;
+	width: 100%;
+}
+
 
 /* Card */
 .card-deck .card {
