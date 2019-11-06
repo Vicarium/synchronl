@@ -38,7 +38,7 @@ class StripePaymentView(View):
         token = request.POST['stripeToken']
 
         # Get payment description from form
-        description = request.POST.get('payment_description', 'Synchro online payment')
+        description = request.POST.get('payment_description', 'Artistic Swimming online payment')
 
         # Get and clean the amount from the url keywords
         cleaned_amount = self.clean_amount(payment_amount)
