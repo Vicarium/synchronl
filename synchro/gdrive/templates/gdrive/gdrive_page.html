@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 
+{% block extra_css %}
+<style>
+    /* default sizing for iframes */
+    iframe {
+        height: 500px;
+        width: 100%;
+    }    
+</style>
+{% endblock %}
+
+
 {% block left_content %}
     {% include "common/includes/intro.html" with intro=self.intro only %}
     {% include "common/includes/body.html" with body=self.body only %}

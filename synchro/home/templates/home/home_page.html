@@ -2,6 +2,7 @@
 {% load blog_tags event_tags %}
 {% load wagtailimages_tags static %}
 
+
 {% block heading %}
   {% include "common/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
   
@@ -47,13 +48,13 @@
     
       <div class="card-deck">
         <div class="card"> 
-              {{ self.twitter_widget | safe }}
+          {{ self.twitter_widget | safe }}
         </div>
-        <div class="card"> 
-            
-              {{ self.facebook_widget | safe }}
-            
-          </div>
+        <div class="card">    
+          <div class="fb-column">
+            {{ self.facebook_widget | safe }}
+          </div>  
+        </div>
       </div>
     </div>
   </div>
@@ -63,5 +64,36 @@
 {% endblock %}
 
 {% block extra_js %}
-	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-{% endblock %}
+<script>
+    var CMSSpace = CMSSpace || {};
+  </script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+<script>
+//Resize Facebook feed
+$(window).on('resize', function () {
+setTimeout(function () { resizeFBPlugin() }, 500);
+});
+
+$(window).on('load', function () {
+setTimeout(function () { resizeFBPlugin() }, 1500);
+});
+
+function resizeFBPlugin(){
+    //getting parent box width
+    var container_width = ($('.fb-column').width() - parseInt($('.fb-column').css('padding-left'))).toFixed(0);
+
+    if (!isNaN(container_width)) {
+        $(".fb-page").attr("data-width", container_width);
+    }
+    if (typeof FB !== 'undefined' ) {
+        FB.XFBML.parse();
+    }
+}
+
+
+
+</script>
+
+  {% endblock %}

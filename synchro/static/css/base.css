@@ -1,13 +1,17 @@
-/* default sizing for iframes */
-iframe {
-	height: 500px;
-	width: 100%;
-}
 
 
-/* Card */
+/* Card 
 .card-deck .card {
 	max-width: fit-content;
+}
+*/
+
+.card {
+    border: none !important;
+}
+
+.fb-column {
+    width:100%;
 }
 
 .card-deck .news-card {
