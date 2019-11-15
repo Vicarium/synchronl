@@ -1,11 +1,34 @@
 /* Theming Variables */
 :root {
+	/* Pallet */
 	--nlarts-canada:#F4333F;
 	--nlarts-bright-blue:#0047BB;
 	--nlarts-deep-blue:#011C48;
 	--nlarts-light-blue:#00768F;
 	--nlarts-aqua-blue: #13D0CA;
-	}
+
+	--summit-blue-color: #0ba8dd;
+	--summit-orange-color: #f58c3e;
+	--summit-deep-blue: #141E40;
+	--summit-light-blue: #216279;
+	--summit-bright-blue: #23346b;
+
+	/* Theme */
+	--highlight-color: var(--summit-orange-color);
+	--bright-color: var(--summit-blue-color);
+	--neutral-color: var(--summit-mid-blue);
+	--dark-color: var(--summit-deep-blue);
+	--white-color: white;
+
+	/* Specific Uses */
+	--dark-text-color: var(--dark-color);
+	--light-text-color: var(--white-color);
+	--footer-color: var(--dark-color);
+	--well-color: var(--dark-color);
+	--dropdown-color: var(--bright-color);
+	--button-color: var(--highlight-color);
+
+}
 	
 /* Theming */
 
@@ -15,7 +38,7 @@
 body {
 
 	font-family: 'Barlow', sans-serif!important;
-	color: var(--nlarts-deep-blue);
+	color: var(--dark-text-color);
 
 }
 
@@ -24,46 +47,46 @@ body {
 }
 
 div {
-	color: var(--nlarts-deep-blue);
+	color: var(--dark-text-color);
 }
 
 .list-group-item{
-	color: var(--nlarts-deep-blue)!important;
+	color: var(--dark-text-color)!important;
 
 }
 
 .jumbotron {
-	background-color: var(--nlarts-deep-blue)!important;
+	background-color: var(--well-color)!important;
 }
 
 #page-title {
-	color: white;
+	color: var(--light-text-color);
 	font-weight: 900;
 }
 
 #blog-feature {
-	background-color: var(--nlarts-deep-blue);
+	background-color: var(--dark-color);
 }
 
 .news-block {
-	background-color: var(--nlarts-aqua-blue);
+	background-color: var(--bright-color);
 }
 
 footer {
-	background-color: var(--nlarts-deep-blue);
+	background-color: var(--footer-color);
 }
 
 #read-btn {
-	background-color: var(--nlarts-canada);
-	border-color: var(--nlarts-canada);
+	background-color: var(--button-color);
+	border-color: var(--button-color);
 }
 
 ul.dropdown-menu {
-	background-color: var(--nlarts-aqua-blue)!important;
+	background-color: var(--dropdown-color)!important;
 }
 
 ul.dropdown-menu li a {
-	color: var(--nlarts-deep-blue)!important;
+	color: var(--dark-text-color)!important;
 }
 
 
