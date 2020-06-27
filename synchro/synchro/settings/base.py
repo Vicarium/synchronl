@@ -34,6 +34,8 @@ print(str(ROOT_DIR.path('.env')))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 ALLOWED_HOSTS = [
+    "cbssilhouettes.nlartisticswimming.com",
+    "*.cbssilhouettes.nlartisticswimming.com",
     "summitsynchro.synchronl.com",
     "synchronl.com",
     "www.synchronl.com",

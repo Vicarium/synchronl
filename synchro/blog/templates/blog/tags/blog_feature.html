@@ -8,9 +8,11 @@
     <div class="col-md-3">
       <img 
       src="{% if site_root.title == "Summit Synchro" %}
-      {% static 'images/summitsynchro.png' %}"
+        {% static 'images/summitsynchro.png' %}"
+      {% elif site_root.title == "CBS Silhouettes" %}
+        {% static 'images/OFFICIAL CBSS Logo.gif' %}"
       {% else %}
-      {% static 'images/CAS_NL_Icon_Colour_Rev_RGB.png' %}"
+        {% static 'images/CAS_NL_Icon_Colour_Rev_RGB.png' %}"
       {% endif %}" class="card-img" alt="...">
     </div>
       <div class="col-md-7">

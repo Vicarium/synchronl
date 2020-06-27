@@ -1,0 +1,106 @@
+/* Theming Variables */
+:root {
+	/* Pallet */
+	--nlarts-canada:#F4333F;
+	--nlarts-bright-blue:#0047BB;
+	--nlarts-deep-blue:#011C48;
+	--nlarts-light-blue:#00768F;
+	--nlarts-aqua-blue: #13D0CA;
+
+	--summit-blue-color: #0ba8dd;
+	--summit-orange-color: #f58c3e;
+	--summit-deep-blue: #141E40;
+	--summit-light-blue: #216279;
+	--summit-bright-blue: #23346b;
+
+	--cbs-grey-color: #b9bdc0;
+	--cbs-blue-color: #353d9b;
+	--cbs-yellow-color: #eee41e; /* normal: #f9ed09;*/
+	--cbs-darkgrey-color: #5d5a61;
+	--cbs-lightblue-color: #c0e3f4;
+	--cbs-white-color: #fcfcfd;
+
+	/* Theme */
+	--highlight-color: var(--cbs-yellow-color);
+	--bright-color: var(--cbs-lightblue-color);
+	--neutral-color: var(--cbs-blue-color);
+	--dark-color: var(--cbs-grey-color);
+	--white-color: var(--cbs-white-color);
+
+	/* Specific Uses */
+	--dark-text-color: var(--dark-color);
+	--light-text-color: var(--white-color);
+	--footer-color: var(--dark-color);
+	--well-color: var(--dark-color);
+	--dropdown-color: var(--bright-color);
+	--button-color: var(--highlight-color);
+
+}
+	
+/* Theming */
+
+/* Barlow font, google fonts import */
+@@import url('https://fonts.googleapis.com/css?family=Barlow:400,500,600,700,900&display=swap');
+
+body {
+
+	font-family: 'Barlow', sans-serif!important;
+	color: var(--dark-text-color);
+
+}
+
+.h1, h1 {
+	font-weight: 900 !important;
+}
+
+div {
+	color: var(--dark-text-color);
+}
+
+.list-group-item{
+	color: var(--dark-text-color)!important;
+
+}
+
+.jumbotron {
+	background-color: var(--well-color)!important;
+}
+
+#page-title {
+	color: var(--light-text-color);
+	font-weight: 900;
+}
+
+#blog-feature {
+	background-color: var(--dark-color);
+}
+
+.news-block {
+	background-color: var(--bright-color);
+}
+
+footer {
+	background-color: var(--footer-color);
+}
+
+#read-btn {
+	background-color: var(--button-color);
+	border-color: var(--button-color);
+}
+
+ul.dropdown-menu {
+	background-color: var(--dropdown-color)!important;
+}
+
+ul.dropdown-menu li a {
+	color: var(--dark-text-color)!important;
+}
+
+
+/* End Theming */
+
+/* Adjustments */
+#sidebar-logo {
+	padding: 1.25rem;
+	max-width: 85%!important;
+}
