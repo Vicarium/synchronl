@@ -15,7 +15,7 @@
 
 	--cbs-grey-color: #b9bdc0;
 	--cbs-blue-color: #353d9b;
-	--cbs-yellow-color: #eee41e; /* normal: #f9ed09;*/
+	--cbs-yellow-color: #e4d906; /* normal: #f9ed09;*/
 	--cbs-darkgrey-color: #5d5a61;
 	--cbs-lightblue-color: #c0e3f4;
 	--cbs-white-color: #fcfcfd;
@@ -24,7 +24,7 @@
 	--highlight-color: var(--cbs-yellow-color);
 	--bright-color: var(--cbs-lightblue-color);
 	--neutral-color: var(--cbs-blue-color);
-	--dark-color: var(--cbs-grey-color);
+	--dark-color: var(--cbs-blue-color);
 	--white-color: var(--cbs-white-color);
 
 	/* Specific Uses */
