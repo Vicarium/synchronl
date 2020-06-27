@@ -51,6 +51,8 @@ ALLOWED_HOSTS = [
 #DEBUG = env('DEBUG')
 DEBUG = True
 
+SECURE_SSL_REDIRECT = env.bool('SSL_REDIRECT')
+
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
 SECRET_KEY = env('SECRET_KEY')
 
