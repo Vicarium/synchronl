@@ -22,7 +22,24 @@
         data-amount="{{ page.payment_amount }}"
         data-name="Summit Synchro"
         data-description="{{ page.payment_description }}"
-        data-image="http://www.synchronl.com/static/images/g4167.png"
+        data-image="{% static "/images/summitsynchro.png" %}"
+        data-locale="auto"
+        data-currency="cad">
+    </script>
+</form>
+{% elif site_root.title == "CBS Silhouettes" %}
+<form action="/payment/stripe/amount={{ page.payment_amount }}/" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="thank_you_text" value="{{ page.thank_you_text }}"></input>
+    <input type="hidden" name="payment_description" value="{{ page.payment_description }}"></input>
+    <input type="hidden" name="site_title" value="CBS Silhouettes"></input>
+    <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_51HJlPLG72yBfenEIj0hx00angvSSZQCreqvfpgrUOUWZIaVgiyQBiEj8yZoHlrGfKLxOF8ZBKUSpItf84lUAPRrY00eRnCwDjO"
+        data-amount="{{ page.payment_amount }}"
+        data-name="CBS Silhouettes"
+        data-description="{{ page.payment_description }}"
+        data-image="{% static "/images/OFFICIAL CBSS Logo.gif" %}"
         data-locale="auto"
         data-currency="cad">
     </script>

@@ -59,6 +59,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 SUMMIT_API_KEY = env('STRIPE_SUMMIT')
 SYNCHRONL_API_KEY = env('STRIPE_NLARTS')
+CBS_API_KEY = env('STRIPE_CBS')
 
 
 # Application definition

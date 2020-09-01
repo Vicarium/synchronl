@@ -24,12 +24,15 @@ class StripePaymentView(View):
 
         synchronl_api_key = settings.SYNCHRONL_API_KEY
         summit_api_key = settings.SUMMIT_API_KEY
+        cbs_api_key = settings.CBS_API_KEY
 
         # Set which api key to use
         site_title = request.POST['site_title']
 
         if site_title == "Summit Synchro":
             stripe.api_key = summit_api_key
+        elif site_title == "CBS Silhouettes":
+            stripe.api_key = cbs_api_key
         else:
             stripe.api_key = synchronl_api_key
 
