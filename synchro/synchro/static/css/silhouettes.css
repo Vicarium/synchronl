@@ -40,7 +40,7 @@
 /* Theming */
 
 /* Barlow font, google fonts import */
-@@import url('https://fonts.googleapis.com/css?family=Barlow:400,500,600,700,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Barlow:400,500,600,700,900&display=swap');
 
 body {
 
@@ -85,7 +85,8 @@ footer {
 
 #read-btn {
 	background-color: var(--button-color);
-	border-color: var(--button-color);
+	border-color: var(--dark-text-color);
+	color: var(--dark-text-color);
 }
 
 ul.dropdown-menu {
