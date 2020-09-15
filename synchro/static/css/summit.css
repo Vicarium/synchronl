@@ -33,7 +33,7 @@
 /* Theming */
 
 /* Barlow font, google fonts import */
-@@import url('https://fonts.googleapis.com/css?family=Barlow:400,500,600,700,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Barlow:400,500,600,700,900&display=swap');
 
 body {
 
@@ -95,5 +95,5 @@ ul.dropdown-menu li a {
 /* Adjustments */
 #sidebar-logo {
 	padding: 1.25rem;
-	max-width: 85%!important;
+	max-width: 100%!important;
 }
